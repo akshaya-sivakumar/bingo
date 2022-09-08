@@ -44,10 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
           }
           hostDialog(context, bingoDetail.name);
         } else {
-          if (mounted)
+          if (mounted) {
             setState(() {
               selectedList.add(bingoDetail.value);
             });
+          }
 
           checkBingo();
         }
