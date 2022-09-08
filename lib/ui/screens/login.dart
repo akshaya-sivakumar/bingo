@@ -1,3 +1,4 @@
+import 'package:bingo/constants.dart';
 import 'package:bingo/ui/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,6 +68,9 @@ class _LoginState extends State<Login> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: TextFieldWidget(
                         color: Colors.white,
+                        onChanged: (e) {
+                          AppConstants.user = e;
+                        },
                         controller: namecontroller,
                         title: "Enter your name"),
                   ),
@@ -79,7 +83,8 @@ class _LoginState extends State<Login> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                         gradient: LinearGradient(colors: [
                           Colors.red[800]!,
                           Colors.red[200]!,

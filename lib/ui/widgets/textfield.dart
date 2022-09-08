@@ -5,6 +5,7 @@ class TextFieldWidget extends StatelessWidget {
   final Icon? leadingIcon;
   final bool isTitle;
   final Color? color;
+  final Function(String)? onChanged;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   const TextFieldWidget(
@@ -14,6 +15,7 @@ class TextFieldWidget extends StatelessWidget {
       required this.title,
       this.leadingIcon,
       this.validator,
+      this.onChanged,
       this.color})
       : super(key: key);
 
@@ -34,6 +36,7 @@ class TextFieldWidget extends StatelessWidget {
             child: TextFormField(
                 controller: controller,
                 validator: validator,
+                onChanged: onChanged,
                 // autovalidateMode: AutovalidateMode.always,
                 style: Theme.of(context)
                     .textTheme
@@ -44,7 +47,8 @@ class TextFieldWidget extends StatelessWidget {
                         const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     prefixIcon: leadingIcon,
                     // hintText: title,
-                    hintStyle: const TextStyle(color: Colors.white, fontSize: 14),
+                    hintStyle:
+                        const TextStyle(color: Colors.white, fontSize: 14),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: color ?? Colors.redAccent, width: 1.0),

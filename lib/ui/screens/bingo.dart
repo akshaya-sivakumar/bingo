@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_socket_channel/io.dart';
 
+import '../../constants.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -95,7 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (bingoList.length >= 5) {
       channels?.sink.add(json
-          .encode(BingoModel(name: "akshaya", value: "winner".toString()))
+          .encode(
+              BingoModel(name: AppConstants.user, value: "winner".toString()))
           .toString());
     }
   }
@@ -175,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 .contains(numberList[i][j])) {
                                           channels?.sink.add(json
                                               .encode(BingoModel(
-                                                  name: "akshaya",
+                                                  name: AppConstants.user,
                                                   value: numberList[i][j]
                                                       .toString()))
                                               .toString());
@@ -451,8 +454,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           blastDirection: pi, // radial value - LEFT
                           particleDrag: 0.05, // apply drag to the confetti
                           emissionFrequency: 0.05, // how often it should emit
-                          numberOfParticles:
-                              20, // number of particles to emit
+                          numberOfParticles: 20, // number of particles to emit
                           gravity: 0.05, // gravity - or fall speed
                           shouldLoop: false,
                           colors: const [
