@@ -213,7 +213,7 @@ class _InitGameState extends State<InitGame> {
             desc: 'This is also Ignored',
             btnCancelOnPress: () {},
             btnOkOnPress: () {
-              Navigator.of(context).pushNamed("/codepage");
+              Navigator.of(context).pushNamed("/bingo");
             },
             btnOkText: "Continue")
         .show();
