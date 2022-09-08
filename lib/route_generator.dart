@@ -5,22 +5,21 @@ import 'package:bingo/ui/screens/login.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  final args = settings.arguments;
   if (settings.name == "/") {
     return MaterialPageRoute(
-      builder: (_) => Login(),
+      builder: (_) => const Login(),
     );
   } else if (settings.name == "/initgame") {
     return MaterialPageRoute(
-      builder: (_) => InitGame(),
+      builder: (_) => const InitGame(),
     );
   } else if (settings.name == "/joinGame") {
     return MaterialPageRoute(
-      builder: (_) => JoinGame(),
+      builder: (_) => const JoinGame(),
     );
   } else if (settings.name == "/bingo") {
     return MaterialPageRoute(
-      builder: (_) => MyHomePage(),
+      builder: (_) => const MyHomePage(),
     );
   } else {
     return _errorRoute();

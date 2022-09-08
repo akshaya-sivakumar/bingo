@@ -44,7 +44,7 @@ class TextFieldWidget extends StatelessWidget {
                         const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     prefixIcon: leadingIcon,
                     // hintText: title,
-                    hintStyle: TextStyle(color: Colors.white, fontSize: 14),
+                    hintStyle: const TextStyle(color: Colors.white, fontSize: 14),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: color ?? Colors.redAccent, width: 1.0),
