@@ -1,4 +1,5 @@
 import 'package:bingo/ui/screens/bingo.dart';
+import 'package:bingo/ui/screens/generate_code.dart';
 import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bingo/ui/screens/init_game.dart';
 import 'package:bingo/ui/screens/login.dart';
@@ -26,6 +27,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         create: (context) => BingoGameBloc(),
         child: const BingoGamePage(),
       ),
+    );
+  } else if (settings.name == "/codepage") {
+    return MaterialPageRoute(
+      builder: (_) => const CodePage(),
     );
   } else {
     return _errorRoute();
