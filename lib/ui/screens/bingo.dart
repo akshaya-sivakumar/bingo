@@ -41,12 +41,11 @@ class _MyHomePageState extends State<MyHomePage> {
             print(bingoDetail.value);
           }
           hostDialog(context, bingoDetail.name);
-        }
-        {
-          selectedList.add(bingoDetail.value);
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            setState(() {});
-          });
+        } else {
+          if (mounted)
+            setState(() {
+              selectedList.add(bingoDetail.value);
+            });
 
           checkBingo();
         }
@@ -285,7 +284,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           const Icon(
                             Icons.check,
                             size: 40,
-                            color: Colors.deepPurple,
+                            color: Colors.black,
                           )
                       ],
                     ),
@@ -303,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           const Icon(
                             Icons.check,
                             size: 40,
-                            color: Colors.deepPurple,
+                            color: Colors.black,
                           )
                       ],
                     ),
@@ -321,7 +320,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           const Icon(
                             Icons.check,
                             size: 40,
-                            color: Colors.deepPurple,
+                            color: Colors.black,
                           )
                       ],
                     ),
@@ -339,7 +338,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           const Icon(
                             Icons.check,
                             size: 40,
-                            color: Colors.deepPurple,
+                            color: Colors.black,
                           )
                       ],
                     ),
@@ -357,7 +356,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           const Icon(
                             Icons.check,
                             size: 40,
-                            color: Colors.deepPurple,
+                            color: Colors.black,
                           )
                       ],
                     ),
@@ -440,7 +439,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: () {},
                         child: Text(
                           "$name wins",
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: GoogleFonts.akayaKanadaka(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Align(
@@ -451,8 +452,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           blastDirection: pi, // radial value - LEFT
                           particleDrag: 0.05, // apply drag to the confetti
                           emissionFrequency: 0.05, // how often it should emit
-                          numberOfParticles:
-                              20, // number of particles to emit
+                          numberOfParticles: 20, // number of particles to emit
                           gravity: 0.05, // gravity - or fall speed
                           shouldLoop: false,
                           colors: const [
@@ -474,7 +474,7 @@ class _MyHomePageState extends State<MyHomePage> {
             btnOkOnPress: () {
               Navigator.of(context).pushNamed("/initgame");
             },
-            btnOkText: "Continue")
+            btnOkText: "Close")
         .show();
   }
 
