@@ -7,6 +7,7 @@ class BingoGameState {
   List bingoList = [];
   bool start = false;
   bool won = false;
+  bool opponentmove = false;
   String winnerName = "";
 }
 

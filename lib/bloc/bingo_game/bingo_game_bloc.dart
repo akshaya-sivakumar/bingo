@@ -12,28 +12,12 @@ class BingoGameBloc extends Bloc<BingoGameEvent, BingoGameState> {
   BingoChange bingo = BingoChange();
   IOWebSocketChannel? channels;
   BingoGameBloc() : super(BingoGameInitial()) {
-    on<BingoAddEvent>(
-      (event, emit) => {
-        channels?.sink.add(json
-            .encode(BingoModel(name: AppConstants.user, value: event.value))
-            .toString())
-      },
-    );
-    on<BingoChangeEvent>((event, emit) {
-      emit(BingoProgress());
-      BingoModel bingoDetail = BingoModel.fromJson(json.decode(event.message));
-      if (bingoDetail.value == "winner") {
-        channels?.sink.close();
+    bingoAddEvent();
+    bingoChangeEvent();
+    bingoStartEvent();
+  }
 
-        emit(bingo
-          ..won = true
-          ..winnerName = bingoDetail.name);
-      } else {
-        bingo.selectedList.add(bingoDetail.value);
-        checkBingo();
-        emit(bingo);
-      }
-    });
+  void bingoStartEvent() async {
     on<BingoStartEvent>(
       (event, emit) async {
         bingo.numberList = event.numberList;
@@ -49,6 +33,42 @@ class BingoGameBloc extends Bloc<BingoGameEvent, BingoGameState> {
       transformer: restartable(),
     );
   }
+
+  void bingoChangeEvent() {
+    on<BingoChangeEvent>((event, emit) {
+      emit(BingoProgress());
+      BingoModel bingoDetail = BingoModel.fromJson(json.decode(event.message));
+      if (bingoDetail.value == "winner") {
+        channels?.sink.close();
+
+        emit(bingo
+          ..won = true
+          ..winnerName = bingoDetail.name);
+      } else {
+        if (state.start) {
+          if (bingoDetail.name == AppConstants.user) {
+            bingo.opponentmove = true;
+          } else {
+            bingo.opponentmove = true;
+          }
+          bingo.selectedList.add(bingoDetail.value);
+          checkBingo();
+          emit(bingo);
+        }
+      }
+    });
+  }
+
+  void bingoAddEvent() {
+    return on<BingoAddEvent>(
+      (event, emit) => {
+        channels?.sink.add(json
+            .encode(BingoModel(name: AppConstants.user, value: event.value))
+            .toString())
+      },
+    );
+  }
+
   List diaList1 = [];
   List diaList2 = [];
   List horiList = [];

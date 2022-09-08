@@ -2,7 +2,6 @@ import 'package:bingo/bloc/bingo_game/bingo_game_bloc.dart';
 import 'package:bingo/ui/widgets/bingo_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../utils/app_utils.dart';
 import '../widgets/bingo_name_widget.dart';
 import '../widgets/boxcell.dart';
@@ -68,7 +67,8 @@ class _BingoGamePageState extends State<BingoGamePage> {
                                 IgnorePointer(
                                   ignoring: state.start == true
                                       ? false
-                                      : state.numberList[i][j] != "",
+                                      : state.opponentmove ||
+                                          state.numberList[i][j] != "",
                                   child: InkWell(
                                     onTap: () {
                                       if (state.start == true &&
@@ -112,7 +112,7 @@ class _BingoGamePageState extends State<BingoGamePage> {
             ),
             Bingo(state.bingoList.length),
             if (!state.numberList.expand((element) => element).contains(""))
-            AppUtils.start(context, state.numberList),
+              AppUtils.start(context, state.numberList),
             AppUtils.quit(context)
           ],
         );
