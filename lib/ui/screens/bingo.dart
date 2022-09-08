@@ -8,7 +8,14 @@ import 'package:matrix2d/matrix2d.dart';
 import 'package:bingo/model/bingo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+<<<<<<< HEAD
 import 'package:web_socket_channel/io.dart';
+=======
+import '../utils/app_utils.dart';
+import '../widgets/bingo_name_widget.dart';
+import '../widgets/boxcell.dart';
+import '../widgets/winner_widget.dart';
+>>>>>>> parent of 25da8e4 (fixes)
 
 import '../../constants.dart';
 
@@ -117,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     /* log("selected" + selectedList.toString());
     log("numbers" + numberList.toString()); */
     return Scaffold(
@@ -204,6 +212,81 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                         ],
                                       ),
+=======
+    return BingoScaffold(child: BlocBuilder<BingoGameBloc, BingoGameState>(
+      builder: (context, state) {
+        if (state is BingoProgress) return Container();
+        if (state.won) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            WinnerDialog.hostDialog(context, state.winnerName);
+          });
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/images/bingo_name.png"),
+            Container(
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                  color: Colors.pink, borderRadius: BorderRadius.circular(50)),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.pink,
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Table(
+                      border: TableBorder.all(color: Colors.white),
+                      columnWidths: const <int, TableColumnWidth>{
+                        0: IntrinsicColumnWidth(),
+                        1: IntrinsicColumnWidth(),
+                        2: IntrinsicColumnWidth(),
+                        3: IntrinsicColumnWidth(),
+                        4: IntrinsicColumnWidth(),
+                      },
+                      defaultVerticalAlignment:
+                          TableCellVerticalAlignment.middle,
+                      children: <TableRow>[
+                        for (int i = 0; i < 5; i++)
+                          TableRow(
+                            children: <Widget>[
+                              for (int j = 0; j < 5; j++)
+                                IgnorePointer(
+                                  ignoring: state.start == true
+                                      ? false
+                                      : state.numberList[i][j] != "",
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (state.start == true &&
+                                          !state.selectedList.contains(
+                                              state.numberList[i][j])) {
+                                        BlocProvider.of<BingoGameBloc>(context)
+                                            .add(BingoAddEvent(
+                                                state.numberList[i][j]));
+                                      } else if (state.start == false) {
+                                        setState(() {
+                                          number += 1;
+                                          state.numberList[i][j] =
+                                              number.toString();
+                                        });
+                                      }
+                                    },
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        BoxCell(number: state.numberList[i][j]),
+                                        if (state.selectedList.contains(
+                                                state.numberList[i][j]) &&
+                                            state.numberList[i][j] != "")
+                                          const Icon(
+                                            Icons.close,
+                                            size: 55,
+                                            color: Colors.deepPurple,
+                                          ),
+                                      ],
+>>>>>>> parent of 25da8e4 (fixes)
                                     ),
                                   ),
                               ],
@@ -472,6 +555,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   )),
             ),
+<<<<<<< HEAD
             title: 'This is Ignored',
             desc: 'This is also Ignored',
             // btnCancelOnPress: () {},
@@ -504,5 +588,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     path.close();
     return path;
+=======
+            Bingo(state.bingoList.length),
+            if (!state.numberList.expand((element) => element).contains(""))
+            AppUtils.start(context, state.numberList),
+            AppUtils.quit(context)
+          ],
+        );
+      },
+    ));
+>>>>>>> parent of 25da8e4 (fixes)
   }
 }
