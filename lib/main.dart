@@ -3,7 +3,6 @@ import 'package:bingo/ui/screens/bingo.dart';
 import 'package:bingo/ui/screens/login.dart';
 
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/io.dart';
 
 void main() {
   runApp(const MyApp());
