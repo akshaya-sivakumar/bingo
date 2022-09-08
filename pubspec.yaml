@@ -46,6 +46,8 @@ dependencies:
   dropdown_button2: ^1.7.2
   pin_code_fields: ^7.4.0
   confetti: ^0.7.0
+  flutter_bloc: ^8.1.1
+  bloc_concurrency: ^0.2.0
 
 dev_dependencies:
   flutter_test:
