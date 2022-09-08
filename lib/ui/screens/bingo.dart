@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (bingoDetail.value == "winner") {
           channels?.sink.close();
           print(bingoDetail.value);
-          hostDialog(context);
+          hostDialog(context, bingoDetail.name);
         }
         {
           selectedList.add(bingoDetail.value);
@@ -397,9 +397,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: MediaQuery.of(context).size.width * 0.55,
                 ),
                 onTap: () async {
-                  hostDialog(context);
-
-                  // Navigator.pop(context);
+                  Navigator.pop(context);
                 },
               )
             ],
@@ -431,7 +429,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void hostDialog(BuildContext context) {
+  void hostDialog(BuildContext context, String name) {
     _controllerCenter.play();
     AwesomeDialog(
             dismissOnBackKeyPress: false,
@@ -452,7 +450,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       InkWell(
                         onTap: () {},
                         child: Text(
-                          "User wins",
+                          name + " wins",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
