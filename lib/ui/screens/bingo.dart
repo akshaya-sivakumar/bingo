@@ -1,14 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'dart:math' as math;
 import 'dart:math';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:confetti/confetti.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:matrix2d/matrix2d.dart';
-
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bingo/model/bingo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,22 +24,10 @@ class _MyHomePageState extends State<MyHomePage> {
   bool start = false;
   IOWebSocketChannel? channels;
   late ConfettiController _controllerCenter;
-  late ConfettiController _controllerCenterRight;
-  late ConfettiController _controllerCenterLeft;
-  late ConfettiController _controllerTopCenter;
-  late ConfettiController _controllerBottomCenter;
 
   @override
   void initState() {
     _controllerCenter =
-        ConfettiController(duration: const Duration(seconds: 10));
-    _controllerCenterRight =
-        ConfettiController(duration: const Duration(seconds: 10));
-    _controllerCenterLeft =
-        ConfettiController(duration: const Duration(seconds: 10));
-    _controllerTopCenter =
-        ConfettiController(duration: const Duration(seconds: 10));
-    _controllerBottomCenter =
         ConfettiController(duration: const Duration(seconds: 10));
     try {
       channels = IOWebSocketChannel.connect(
@@ -53,7 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
         BingoModel bingoDetail = BingoModel.fromJson(json.decode(message));
         if (bingoDetail.value == "winner") {
           channels?.sink.close();
-          print(bingoDetail.value);
+          if (kDebugMode) {
+            print(bingoDetail.value);
+          }
           hostDialog(context, bingoDetail.name);
         }
         {
@@ -68,7 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // channel.sink.close(status.goingAway);
       });
     } catch (e) {
-      print("error" + e.toString());
+      if (kDebugMode) {
+        print("error$e");
+      }
     }
 
     numberList = List.generate(5, (index) => List.generate(5, (i) => ""));
@@ -101,7 +89,9 @@ class _MyHomePageState extends State<MyHomePage> {
     if (Set.of(selectedList).containsAll(diaList2[0])) {
       bingoList.add(11);
     }
-    print("bingolist" + bingoList.toString());
+    if (kDebugMode) {
+      print("bingolist$bingoList");
+    }
 
     if (bingoList.length >= 5) {
       channels?.sink.add(json
@@ -145,12 +135,9 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset("assets/images/bingo_name.png"),
               Container(
-                  //  decoration: BoxDecoration(color: Colors.transparent),
-
-                  child: Image.asset("assets/images/bingo_name.png")),
-              Container(
-                padding: EdgeInsets.all(22),
+                padding: const EdgeInsets.all(22),
                 decoration: BoxDecoration(
                     color: Colors.pink,
                     borderRadius: BorderRadius.circular(50)),
@@ -294,8 +281,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.w900,
                               fontSize: 40),
                         ),
-                        if (bingoList.length >= 1)
-                          Icon(
+                        if (bingoList.isNotEmpty)
+                          const Icon(
                             Icons.check,
                             size: 40,
                             color: Colors.deepPurple,
@@ -313,7 +300,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 40),
                         ),
                         if (bingoList.length >= 2)
-                          Icon(
+                          const Icon(
                             Icons.check,
                             size: 40,
                             color: Colors.deepPurple,
@@ -331,7 +318,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 40),
                         ),
                         if (bingoList.length >= 3)
-                          Icon(
+                          const Icon(
                             Icons.check,
                             size: 40,
                             color: Colors.deepPurple,
@@ -349,7 +336,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 40),
                         ),
                         if (bingoList.length >= 4)
-                          Icon(
+                          const Icon(
                             Icons.check,
                             size: 40,
                             color: Colors.deepPurple,
@@ -367,7 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 40),
                         ),
                         if (bingoList.length >= 5)
-                          Icon(
+                          const Icon(
                             Icons.check,
                             size: 40,
                             color: Colors.deepPurple,
@@ -378,10 +365,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               InkWell(
-                child: Image.asset(
-                  "assets/images/start.png",
-                  width: MediaQuery.of(context).size.width * 0.55,
-                ),
+                // ignore: iterable_contains_unrelated_type
                 onTap: numberList.contains("")
                     ? null
                     : () async {
@@ -390,6 +374,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           start = true;
                         });
                       },
+                child: Image.asset(
+                  "assets/images/start.png",
+                  width: MediaQuery.of(context).size.width * 0.55,
+                ),
               ),
               InkWell(
                 child: Image.asset(
@@ -421,7 +409,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.white,
           child: Text(
             number,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
@@ -436,6 +424,7 @@ class _MyHomePageState extends State<MyHomePage> {
             dismissOnTouchOutside: false,
             dialogBackgroundColor: Colors.white,
             context: context,
+            // ignore: deprecated_member_use
             animType: AnimType.SCALE,
             customHeader: CircleAvatar(
                 radius: 50,
@@ -450,32 +439,30 @@ class _MyHomePageState extends State<MyHomePage> {
                       InkWell(
                         onTap: () {},
                         child: Text(
-                          name + " wins",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          "$name wins",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Container(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: ConfettiWidget(
-                            confettiController: _controllerCenter,
-                            blastDirectionality: BlastDirectionality.explosive,
-                            blastDirection: pi, // radial value - LEFT
-                            particleDrag: 0.05, // apply drag to the confetti
-                            emissionFrequency: 0.05, // how often it should emit
-                            numberOfParticles:
-                                20, // number of particles to emit
-                            gravity: 0.05, // gravity - or fall speed
-                            shouldLoop: false,
-                            colors: const [
-                              Colors.green,
-                              Colors.blue,
-                              Colors.pink
-                            ], // manually specify the colors to be used
-                            strokeWidth: 1,
-                            strokeColor: Colors.white,
-                            createParticlePath: drawStar,
-                          ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: ConfettiWidget(
+                          confettiController: _controllerCenter,
+                          blastDirectionality: BlastDirectionality.explosive,
+                          blastDirection: pi, // radial value - LEFT
+                          particleDrag: 0.05, // apply drag to the confetti
+                          emissionFrequency: 0.05, // how often it should emit
+                          numberOfParticles:
+                              20, // number of particles to emit
+                          gravity: 0.05, // gravity - or fall speed
+                          shouldLoop: false,
+                          colors: const [
+                            Colors.green,
+                            Colors.blue,
+                            Colors.pink
+                          ], // manually specify the colors to be used
+                          strokeWidth: 1,
+                          strokeColor: Colors.white,
+                          createParticlePath: drawStar,
                         ),
                       ),
                     ],

@@ -1,16 +1,5 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'dart:math' as math;
-import 'package:bingo/ui/widgets/textfield.dart';
-import 'package:matrix2d/matrix2d.dart';
-
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:bingo/model/bingo_model.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:web_socket_channel/io.dart';
 
 class JoinGame extends StatefulWidget {
   const JoinGame({super.key});

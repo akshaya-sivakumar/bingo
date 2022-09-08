@@ -51,11 +51,11 @@ class _InitGameState extends State<InitGame> {
                   "assets/images/bingo_name.png",
                   width: MediaQuery.of(context).size.width * 0.8,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 cardWidget(context, "Join a game", Colors.blueAccent),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 cardWidget(context, "Host a game", Colors.pinkAccent)
@@ -66,27 +66,6 @@ class _InitGameState extends State<InitGame> {
   }
 
   Widget cardWidget(BuildContext context, String title, Color color) {
-    String dropdown;
-    AlertDialog alert = AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      title: Text("Select Max No.of Users"),
-      content: Text(
-          "Would you like to continue learning how to use Flutter alerts?"),
-      actions: [
-        TextButton(
-          child: Text("Cancel"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        TextButton(
-          child: Text("Continue"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        )
-      ],
-    );
     return InkWell(
       onTap: () {
         if (title == "Join a game") {
@@ -119,8 +98,9 @@ class _InitGameState extends State<InitGame> {
     AwesomeDialog(
             dismissOnBackKeyPress: false,
             dismissOnTouchOutside: false,
-            dialogBackgroundColor: Color.fromRGBO(228, 171, 245, 0.5),
+            dialogBackgroundColor: const Color.fromRGBO(228, 171, 245, 0.5),
             context: context,
+            // ignore: deprecated_member_use
             animType: AnimType.SCALE,
             customHeader: CircleAvatar(
                 radius: 50,
@@ -160,16 +140,16 @@ class _InitGameState extends State<InitGame> {
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.person,
                                         color: Colors.deepPurple,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.person,
                                         color: Colors.deepPurple,
                                       ),
                                       if (item == "3")
-                                        Icon(
+                                        const Icon(
                                           Icons.person,
                                           color: Colors.deepPurple,
                                         ),

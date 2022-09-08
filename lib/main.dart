@@ -1,7 +1,4 @@
 import 'package:bingo/route_generator.dart';
-import 'package:bingo/ui/screens/bingo.dart';
-import 'package:bingo/ui/screens/login.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {

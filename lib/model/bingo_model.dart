@@ -12,9 +12,9 @@ class BingoModel {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['name'] = name;
-    _data['value'] = value;
-    return _data;
+    final data = <String, dynamic>{};
+    data['name'] = name;
+    data['value'] = value;
+    return data;
   }
 }

@@ -1,12 +1,4 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'dart:math' as math;
 import 'package:bingo/ui/widgets/textfield.dart';
-import 'package:matrix2d/matrix2d.dart';
-
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:bingo/model/bingo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_socket_channel/io.dart';
@@ -87,7 +79,7 @@ class _LoginState extends State<Login> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                         gradient: LinearGradient(colors: [
                           Colors.red[800]!,
                           Colors.red[200]!,
