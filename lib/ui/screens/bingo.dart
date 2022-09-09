@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (state is BingoProgressstate) {
             return Container();
           }
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -82,40 +83,43 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Container bingoTable(BingoBlocState state, BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-          color: Colors.pink, borderRadius: BorderRadius.circular(50)),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.pink, borderRadius: BorderRadius.circular(50)),
-            child: Table(
-              border: TableBorder.all(color: Colors.white),
-              columnWidths: const <int, TableColumnWidth>{
-                0: IntrinsicColumnWidth(),
-                1: IntrinsicColumnWidth(),
-                2: IntrinsicColumnWidth(),
-                3: IntrinsicColumnWidth(),
-                4: IntrinsicColumnWidth(),
-              },
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: <TableRow>[
-                for (int i = 0; i < 5; i++)
-                  TableRow(
-                    children: <Widget>[
-                      for (int j = 0; j < 5; j++)
-                        numberBox(state, i, j, context),
-                    ],
-                  ),
-              ],
+  Widget bingoTable(BingoBlocState state, BuildContext context) {
+    return IgnorePointer(
+      ignoring: state.opponentMove,
+      child: Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+            color: Colors.pink, borderRadius: BorderRadius.circular(50)),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.pink, borderRadius: BorderRadius.circular(50)),
+              child: Table(
+                border: TableBorder.all(color: Colors.white),
+                columnWidths: const <int, TableColumnWidth>{
+                  0: IntrinsicColumnWidth(),
+                  1: IntrinsicColumnWidth(),
+                  2: IntrinsicColumnWidth(),
+                  3: IntrinsicColumnWidth(),
+                  4: IntrinsicColumnWidth(),
+                },
+                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                children: <TableRow>[
+                  for (int i = 0; i < 5; i++)
+                    TableRow(
+                      children: <Widget>[
+                        for (int j = 0; j < 5; j++)
+                          numberBox(state, i, j, context),
+                      ],
+                    ),
+                ],
+              ),
             ),
-          ),
-          for (var datas in state.bingoList) bingoLinelogic(datas),
-        ],
+            for (var datas in state.bingoList) bingoLinelogic(datas),
+          ],
+        ),
       ),
     );
   }
