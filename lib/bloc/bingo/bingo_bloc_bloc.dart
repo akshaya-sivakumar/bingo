@@ -55,7 +55,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
           ..won = true
           ..winnerName = bingoDetail.name);
       } else {
-        if (state.start) {
+        if (bingoDonestate.start) {
           if (bingoDetail.name == AppConstants.user) {
             bingoDonestate.opponentMove = true;
           } else {
