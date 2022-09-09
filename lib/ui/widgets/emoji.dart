@@ -84,20 +84,20 @@ class _ViewState extends State<View> with SingleTickerProviderStateMixin {
 
           //   begin: Offset(0, Random().nextDouble() * -1 - 1),
           // end: Offset(Random().nextDouble() * 0.5, 2))
-          .chain(CurveTween(curve: Curves.linear));
+          .chain(CurveTween(curve: Curves.slowMiddle));
       return SlideTransition(
         position: animationController!.drive(tween),
         child: AnimatedAlign(
-          alignment: Alignment.center,
-          duration: Duration(seconds: 10),
+          alignment: item._alignment ?? Alignment.center,
+          duration: Duration(seconds: 2),
           child: AnimatedContainer(
-            duration: Duration(seconds: 10),
+            duration: Duration(seconds: 2),
             width: item._size,
             height: item._size,
             decoration:
                 BoxDecoration(color: item._color, shape: BoxShape.circle),
             child: Image.asset(
-              "assets/images/bingo_name.png",
+              "assets/images/sad.png",
               width: 50,
             ),
           ),
