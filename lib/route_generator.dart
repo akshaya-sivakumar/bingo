@@ -5,13 +5,14 @@ import 'package:bingo/ui/screens/generate_code.dart';
 import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bingo/ui/screens/init_game.dart';
 import 'package:bingo/ui/screens/login.dart';
+import 'package:bingo/ui/widgets/emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   if (settings.name == "/") {
     return MaterialPageRoute(
-      builder: (_) => const Login(),
+      builder: (_) => Homer(),
     );
   } else if (settings.name == "/initgame") {
     return MaterialPageRoute(
