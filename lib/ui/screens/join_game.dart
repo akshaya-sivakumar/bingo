@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class JoinGame extends StatefulWidget {
+  static String gamecode = "";
   const JoinGame({super.key});
 
   @override
@@ -53,7 +54,7 @@ class _JoinGameState extends State<JoinGame> {
                       Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.all(20),
+                            margin: const EdgeInsets.all(20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +64,7 @@ class _JoinGameState extends State<JoinGame> {
                                   style: GoogleFonts.aladin(
                                       fontSize: 30, color: Colors.white),
                                 ), */
-                                Container(
+                                SizedBox(
                                   height: 500,
                                   child: Stack(
                                     alignment: Alignment.center,
@@ -74,7 +75,7 @@ class _JoinGameState extends State<JoinGame> {
                                             borderRadius:
                                                 BorderRadius.circular(30)),
                                         child: Container(
-                                          padding: EdgeInsets.all(30),
+                                          padding: const EdgeInsets.all(30),
                                           height: 400,
                                           decoration: BoxDecoration(
                                               gradient: LinearGradient(
@@ -102,7 +103,7 @@ class _JoinGameState extends State<JoinGame> {
                                                   repeat: true,
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 20,
                                               ),
                                               Text(
@@ -112,8 +113,8 @@ class _JoinGameState extends State<JoinGame> {
                                                     color: Colors.black),
                                               ),
                                               Container(
-                                                padding:
-                                                    EdgeInsets.only(top: 10),
+                                                padding: const EdgeInsets.only(
+                                                    top: 10),
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
@@ -231,7 +232,12 @@ class _JoinGameState extends State<JoinGame> {
                                                     style: TextButton.styleFrom(
                                                         backgroundColor:
                                                             Colors.pink),
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      JoinGame.gamecode =
+                                                          codecontroller.text;
+                                                      Navigator.of(context)
+                                                          .pushNamed("/bingo");
+                                                    },
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment

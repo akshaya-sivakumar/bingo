@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:bingo/constants.dart';
+import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +24,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
     autoGenerate();
 
     gamesink();
+    gameClose();
   }
 
   void gamestart() {
@@ -30,8 +32,8 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
       emit(bingoDonestate
         ..numberList = event.numberList
         ..start = true);
-      channels = IOWebSocketChannel.connect(
-          Uri.parse('ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/1'));
+      channels = IOWebSocketChannel.connect(Uri.parse(
+          'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${JoinGame.gamecode}'));
 
       generateList();
       await emit.onEach(channels!.stream,
@@ -67,6 +69,13 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
           emit(bingoDonestate);
         }
       }
+    });
+  }
+
+  void gameClose() {
+    on<BingoCloseEvent>((event, emit) async {
+      channels?.sink.close();
+      emit(BingoClosestate());
     });
   }
 

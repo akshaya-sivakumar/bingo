@@ -17,3 +17,5 @@ class BingoBlocInitial extends BingoBlocState {}
 class BingoProgressstate extends BingoBlocState {}
 
 class BingoDonestate extends BingoBlocState {}
+
+class BingoClosestate extends BingoBlocState {}

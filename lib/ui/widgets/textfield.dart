@@ -51,15 +51,15 @@ class TextFieldWidget extends StatelessWidget {
                         const TextStyle(color: Colors.white, fontSize: 14),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: color ?? Colors.redAccent, width: 1.0),
+                            color: color ?? Colors.redAccent, width: 2.0),
                         borderRadius: BorderRadius.circular(25.0)),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: color ?? Colors.redAccent, width: 1.0),
+                            color: color ?? Colors.redAccent, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0)),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: color ?? Colors.redAccent, width: 1.0),
+                            color: color ?? Colors.redAccent, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0)))),
           ),
         ],

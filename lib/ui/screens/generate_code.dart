@@ -33,7 +33,7 @@ class _CodePageState extends State<CodePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.deepPurple.withOpacity(0.4),
-        body: Container(
+        body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
@@ -59,7 +59,7 @@ class _CodePageState extends State<CodePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.all(20),
+                        margin: const EdgeInsets.all(20),
                         child: Column(
                           children: [
                             Text(
@@ -67,7 +67,7 @@ class _CodePageState extends State<CodePage> {
                               style: GoogleFonts.aladin(
                                   fontSize: 30, color: Colors.white),
                             ),
-                            Container(
+                            SizedBox(
                               height: 500,
                               child: Stack(
                                 alignment: Alignment.center,
@@ -78,7 +78,7 @@ class _CodePageState extends State<CodePage> {
                                         borderRadius:
                                             BorderRadius.circular(30)),
                                     child: Container(
-                                      padding: EdgeInsets.all(30),
+                                      padding: const EdgeInsets.all(30),
                                       height: 400,
                                       decoration: BoxDecoration(
                                           gradient: LinearGradient(
@@ -107,14 +107,14 @@ class _CodePageState extends State<CodePage> {
                                                 repeat: true,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 20,
                                             ),
                                             Text("Game Code : $code",
                                                 style:
                                                     GoogleFonts.akayaKanadaka(
                                                         fontSize: 30)),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 30,
                                             ),
                                             Text(
@@ -124,7 +124,7 @@ class _CodePageState extends State<CodePage> {
                                                   fontWeight: FontWeight.bold),
                                               textAlign: TextAlign.center,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 20,
                                             ),
                                             SizedBox(
@@ -155,7 +155,7 @@ class _CodePageState extends State<CodePage> {
                                                           _onShareWithResult(
                                                               context);
                                                         },
-                                                        child: Icon(
+                                                        child: const Icon(
                                                           Icons.share,
                                                           color: Colors.white,
                                                         ),
@@ -216,9 +216,10 @@ class _CodePageState extends State<CodePage> {
         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
       );
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      // ignore: use_build_context_synchronously
+      /*   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Share result: ${result.status}"),
-      ));
+      )); */
     }
   }
 }

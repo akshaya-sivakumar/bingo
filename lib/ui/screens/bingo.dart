@@ -1,16 +1,18 @@
 import 'dart:math' as math;
 
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
+import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bingo/ui/widgets/bingo_box.dart';
 import 'package:bingo/ui/widgets/bingo_name.dart';
 import 'package:bingo/ui/widgets/bingo_scaffold.dart';
 import 'package:bingo/ui/widgets/dialog_widget.dart';
-import 'package:confetti/confetti.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bingo/model/bingo_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants.dart';
 
@@ -26,9 +28,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(JoinGame.gamecode);
     return Bingoscaffold(
       child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
         builder: (context, state) {
+          if (state is BingoClosestate) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/initgame", (route) => false);
+            });
+          }
           if (state.won) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               DialogWidget.hostDialog(context, state.winnerName.toString());
@@ -41,15 +50,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset("assets/images/bingo_name.png"),
               bingoTable(state, context),
               BingoName(state.bingoList.length),
+              if (state.opponentMove) turnCheck(context, state),
               if (!state.numberList.expand((element) => element).contains("") &&
                   !state.start)
                 startButton(context, state),
-              exitButton(context)
+              if (state.start == true)
+                const SizedBox(
+                  height: 30,
+                ),
+              exitButton(context, state)
             ],
           );
         },
@@ -57,14 +71,45 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  InkWell exitButton(BuildContext context) {
+  Container turnCheck(BuildContext context, BingoBlocState state) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(20)),
+      margin: const EdgeInsets.only(top: 5),
+      padding: const EdgeInsets.all(10),
+      width: MediaQuery.of(context).size.width * 0.3,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SpinKitWave(
+            color: Colors.white,
+            size: 25,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            state.opponentMove ? "Opponent's turn..." : "Yours turn",
+            style: GoogleFonts.adventPro(color: Colors.white),
+          )
+        ],
+      ),
+    );
+  }
+
+  InkWell exitButton(BuildContext context, BingoBlocState state) {
     return InkWell(
       child: Image.asset(
         "assets/images/quit.png",
-        width: MediaQuery.of(context).size.width * 0.55,
+        width: MediaQuery.of(context).size.width * 0.4,
       ),
       onTap: () async {
-        Navigator.pop(context);
+        if (state.start == false) {
+          Navigator.pop(context);
+        } else {
+          BlocProvider.of<BingoBlocBloc>(context).add(BingoCloseEvent());
+        }
       },
     );
   }
