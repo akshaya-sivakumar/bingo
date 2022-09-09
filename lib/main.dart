@@ -1,5 +1,4 @@
 import 'package:bingo/route_generator.dart';
-import 'package:bingo/ui/widgets/emoji.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +17,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Homer(),
       onGenerateRoute: generateRoute,
       initialRoute: '/',
     );
