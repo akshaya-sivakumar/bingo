@@ -29,8 +29,7 @@ class DialogWidget {
                         child: Text(
                           "$name wins",
                           style: GoogleFonts.akayaKanadaka(
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
                       const Align(
