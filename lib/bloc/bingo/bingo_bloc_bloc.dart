@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:bingo/constants.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -18,6 +19,9 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
   BingoBlocBloc() : super(BingoBlocInitial()) {
     gamestart();
     gamestream();
+
+    autoGenerate();
+
     gamesink();
   }
 
@@ -120,5 +124,33 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
               BingoModel(name: AppConstants.user, value: "winner".toString()))
           .toString());
     }
+  }
+
+  autoGenerate() {
+    List list = shuffle(List<int>.generate(25, (i) => i + 1));
+
+    int number = 0;
+
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 5; j++) {
+        state.numberList[i][j] = list[number].toString();
+        number += 1;
+      }
+    }
+    print(state.numberList);
+  }
+
+  List shuffle(List array) {
+    var random = Random(); //import 'dart:math';
+
+    // Go through all elementsof list
+    for (var i = array.length - 1; i > 0; i--) {
+      // Pick a random number according to the lenght of list
+      var n = random.nextInt(i + 1);
+      var temp = array[i];
+      array[i] = array[n];
+      array[n] = temp;
+    }
+    return array;
   }
 }
