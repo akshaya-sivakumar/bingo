@@ -17,9 +17,9 @@ class DialogWidget {
             animType: AnimType.SCALE,
             customHeader: CircleAvatar(
               radius: 50,
-              backgroundColor: Colors.pinkAccent.withOpacity(0.6),
+              backgroundColor: Colors.green.withOpacity(0.1),
               child: Lottie.asset(
-                "assets/images/loser.json",
+                "assets/images/winners.json",
                 fit: BoxFit.fill,
                 repeat: true,
               ),
@@ -38,10 +38,10 @@ class DialogWidget {
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
-                      // const Align(
-                      //   alignment: Alignment.center,
-                      //   child: Blast(),
-                      // ),
+                      const Align(
+                        alignment: Alignment.center,
+                        child: Blast(),
+                      ),
                     ],
                   )),
             ),
@@ -70,7 +70,7 @@ class _BlastState extends State<Blast> {
   @override
   void initState() {
     _controllerCenter =
-        ConfettiController(duration: const Duration(seconds: 10));
+        ConfettiController(duration: const Duration(seconds: 2));
     _controllerCenter.play();
 
     super.initState();
