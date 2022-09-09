@@ -1,3 +1,3 @@
-class AppConstants{
-  static String user="";
+class AppConstants {
+  static String user = "akshaya";
 }
