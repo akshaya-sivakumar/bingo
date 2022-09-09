@@ -96,7 +96,7 @@ class _BlastState extends State<Blast> {
       ], // manually specify the colors to be used
       strokeWidth: 1,
       strokeColor: Colors.white,
-      createParticlePath: drawStar,
+      // createParticlePath: drawStar,
     );
   }
 
