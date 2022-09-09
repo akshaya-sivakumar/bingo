@@ -19,6 +19,7 @@ class _InitGameState extends State<InitGame> {
   int number = 0;
   bool start = false;
   IOWebSocketChannel? channels;
+  String? selectedValue;
   TextEditingController namecontroller = TextEditingController();
 
   @override
@@ -106,114 +107,117 @@ class _InitGameState extends State<InitGame> {
                 radius: 50,
                 backgroundColor: Colors.pinkAccent.withOpacity(0.6),
                 child: Image.asset("assets/images/bingo_name.png")),
-            body: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton2(
-                    onMenuStateChange: (isOpen) {},
-                    isExpanded: true,
-                    hint: Row(
-                      children: const [
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Expanded(
-                          child: Text(
-                            'Select Max No.of users',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                            overflow: TextOverflow.ellipsis,
+            body: StatefulBuilder(builder: (context, setstate) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      onMenuStateChange: (isOpen) {},
+                      isExpanded: true,
+                      hint: Row(
+                        children: const [
+                          SizedBox(
+                            width: 4,
                           ),
-                        ),
-                      ],
-                    ),
-                    items: ["2", "3"]
-                        .map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.person,
-                                        color: Colors.deepPurple,
-                                      ),
-                                      const Icon(
-                                        Icons.person,
-                                        color: Colors.deepPurple,
-                                      ),
-                                      if (item == "3")
+                          Expanded(
+                            child: Text(
+                              'Select Max No.of users',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                      items: ["2", "3"]
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
                                         const Icon(
                                           Icons.person,
-                                          color: Colors.deepPurple,
+                                          color: Colors.white,
                                         ),
-                                    ],
-                                  ),
-                                  Text(
-                                    item,
-                                    style: GoogleFonts.aBeeZee(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.deepPurple,
+                                        const Icon(
+                                          Icons.person,
+                                          color: Colors.white,
+                                        ),
+                                        if (item == "3")
+                                          const Icon(
+                                            Icons.person,
+                                            color: Colors.white,
+                                          ),
+                                      ],
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              ),
-                            ))
-                        .toList(),
-                    // value: selectedValue,
-                    onChanged: (value) {
-                      setState(() {
-                        // selectedValue = value as String;
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                    ),
-                    iconSize: 14,
-                    iconEnabledColor: Colors.yellow,
-                    iconDisabledColor: Colors.grey,
-                    buttonHeight: 50,
-                    buttonWidth: 250,
-                    buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                    buttonDecoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: Colors.black26,
+                                    Text(
+                                      item,
+                                      style: GoogleFonts.aBeeZee(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ))
+                          .toList(),
+                      value: selectedValue,
+                      onChanged: (value) {
+                        setstate(() {
+                          selectedValue = value as String;
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
                       ),
-                      color: Colors.pinkAccent.withOpacity(0.6),
+                      iconSize: 14,
+                      iconEnabledColor: Colors.yellow,
+                      iconDisabledColor: Colors.grey,
+                      buttonHeight: 50,
+                      buttonWidth: 250,
+                      buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                      buttonDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: Colors.black26,
+                        ),
+                        color: Colors.pinkAccent.withOpacity(0.6),
+                      ),
+                      buttonElevation: 2,
+                      itemHeight: 40,
+                      itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                      dropdownMaxHeight: 200,
+                      dropdownWidth: 250,
+                      dropdownPadding:
+                          const EdgeInsets.only(left: 14, right: 14),
+                      dropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        color: Colors.pink.shade100,
+                      ),
+                      //  dropdownElevation: 8,
+                      scrollbarRadius: const Radius.circular(40),
+                      scrollbarThickness: 6,
+                      scrollbarAlwaysShow: true,
+                      //offset: const Offset(-20, 0),
                     ),
-                    buttonElevation: 2,
-                    itemHeight: 40,
-                    itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                    dropdownMaxHeight: 200,
-                    dropdownWidth: 250,
-                    dropdownPadding: const EdgeInsets.only(left: 14, right: 14),
-                    dropdownDecoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      color: Colors.pink.shade100,
-                    ),
-                    //  dropdownElevation: 8,
-                    scrollbarRadius: const Radius.circular(40),
-                    scrollbarThickness: 6,
-                    scrollbarAlwaysShow: true,
-                    //offset: const Offset(-20, 0),
                   ),
                 ),
-              ),
-            ),
+              );
+            }),
             title: 'This is Ignored',
             desc: 'This is also Ignored',
             btnCancelOnPress: () {},
             btnOkOnPress: () {
-              Navigator.of(context).pushNamed("/bingo");
+              Navigator.of(context).pushNamed("/codepage");
             },
             btnOkText: "Continue")
         .show();
