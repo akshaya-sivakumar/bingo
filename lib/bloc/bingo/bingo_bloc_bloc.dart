@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bingo/constants.dart';
 import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -36,8 +37,12 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
           'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${JoinGame.gamecode}'));
 
       generateList();
-      await emit.onEach(channels!.stream,
-          onData: (message) => add(BingoStreamEvent(message.toString())));
+      await emit.onEach(channels!.stream, onData: (message) {
+        AudioPlayer().play(
+          AssetSource('audio/tone.mp3'),
+        );
+        add(BingoStreamEvent(message.toString()));
+      });
     }, transformer: restartable());
   }
 

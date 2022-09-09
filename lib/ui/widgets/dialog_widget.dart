@@ -6,55 +6,68 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../constants.dart';
+
 class DialogWidget {
   static void hostDialog(BuildContext context, String name) {
     AwesomeDialog(
-            dismissOnBackKeyPress: false,
-            dismissOnTouchOutside: false,
-            dialogBackgroundColor: Colors.white,
-            context: context,
-            // ignore: deprecated_member_use
-            animType: AnimType.SCALE,
-            customHeader: CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.green.withOpacity(0.1),
-              child: Lottie.asset(
-                "assets/images/winners.json",
-                fit: BoxFit.fill,
-                repeat: true,
-              ),
-            ),
-            body: Center(
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Text(
-                          "$name wins",
-                          style: GoogleFonts.akayaKanadaka(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                      const Align(
-                        alignment: Alignment.center,
-                        child: Blast(),
-                      ),
-                    ],
-                  )),
-            ),
-            title: 'This is Ignored',
-            desc: 'This is also Ignored',
-            // btnCancelOnPress: () {},
-            btnOkOnPress: () {
-              // Navigator.of(context).pop();
-              // Navigator.of(context)
-              //     .pushNamedAndRemoveUntil("/initgame", (r) => false);
-            },
-            btnOkText: "Close")
-        .show();
+      dismissOnBackKeyPress: false,
+      dismissOnTouchOutside: false,
+      dialogBackgroundColor: Colors.white,
+      context: context,
+      // ignore: deprecated_member_use
+      animType: AnimType.SCALE,
+      customHeader: CircleAvatar(
+        radius: 50,
+        backgroundColor: Colors.green.withOpacity(0.1),
+        child: Lottie.asset(
+          AppConstants.user == name
+              ? "assets/images/winners.json"
+              : "assets/images/loser.json",
+          fit: BoxFit.fill,
+          repeat: true,
+        ),
+      ),
+      body: StatefulBuilder(builder: (context, setstate) {
+        return Center(
+          child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      name == AppConstants.user ? name + " wins" : "You lose",
+                      style: GoogleFonts.akayaKanadaka(
+                          fontWeight: FontWeight.bold, fontSize: 25),
+                    ),
+                  ),
+                  if (name == AppConstants.user)
+                    const Align(
+                      alignment: Alignment.center,
+                      child: Blast(),
+                    ),
+                ],
+              )),
+        );
+      }),
+      title: 'This is Ignored',
+      desc: 'This is also Ignored',
+      // btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil("/initgame", (r) => false);
+      },
+      btnOk: Image.asset(
+        "assets/images/replay.png",
+        width: MediaQuery.of(context).size.width * 0.4,
+      ),
+      btnCancel: Image.asset(
+        "assets/images/quit.png",
+        width: MediaQuery.of(context).size.width * 0.4,
+      ),
+    ).show();
   }
 }
 

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
 import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bingo/ui/widgets/bingo_box.dart';
@@ -38,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   .pushNamedAndRemoveUntil("/initgame", (route) => false);
             });
           }
+
           if (state.won) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               DialogWidget.hostDialog(context, state.winnerName.toString());
@@ -47,6 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
           if (state is BingoProgressstate) {
             return Container();
           }
+          /* if (state is BingoBlocState && !state.won && state.start) {
+            AudioPlayer().play(
+              AssetSource('audio/tone.mp3'),
+            );
+          } */
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
