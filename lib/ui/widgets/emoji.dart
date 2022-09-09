@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'dialog_widget.dart';
+
 class Homer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -112,13 +114,14 @@ class _ViewState extends State<View> with SingleTickerProviderStateMixin {
   }
 
   void makeItems() {
-    setState(() {
-      items.clear();
-      for (int i = 0; i < widget.numberOfItems; i++) {
-        items.add(Item());
-      }
-    });
-    animationController?.reset();
-    animationController?.forward();
+    DialogWidget.hostDialog(context, "name");
+    // setState(() {
+    //   items.clear();
+    //   for (int i = 0; i < widget.numberOfItems; i++) {
+    //     items.add(Item());
+    //   }
+    // });
+    // animationController?.reset();
+    // animationController?.forward();
   }
 }

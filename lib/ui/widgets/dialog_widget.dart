@@ -4,6 +4,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class DialogWidget {
   static void hostDialog(BuildContext context, String name) {
@@ -15,9 +16,14 @@ class DialogWidget {
             // ignore: deprecated_member_use
             animType: AnimType.SCALE,
             customHeader: CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.pinkAccent.withOpacity(0.6),
-                child: Image.asset("assets/images/bingo_name.png")),
+              radius: 50,
+              backgroundColor: Colors.pinkAccent.withOpacity(0.6),
+              child: Lottie.asset(
+                "assets/images/loser.json",
+                fit: BoxFit.fill,
+                repeat: true,
+              ),
+            ),
             body: Center(
               child: Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -32,10 +38,10 @@ class DialogWidget {
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
-                      const Align(
-                        alignment: Alignment.center,
-                        child: Blast(),
-                      ),
+                      // const Align(
+                      //   alignment: Alignment.center,
+                      //   child: Blast(),
+                      // ),
                     ],
                   )),
             ),
@@ -43,8 +49,9 @@ class DialogWidget {
             desc: 'This is also Ignored',
             // btnCancelOnPress: () {},
             btnOkOnPress: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/initgame", (r) => false);
+              // Navigator.of(context).pop();
+              // Navigator.of(context)
+              //     .pushNamedAndRemoveUntil("/initgame", (r) => false);
             },
             btnOkText: "Close")
         .show();
@@ -83,7 +90,9 @@ class _BlastState extends State<Blast> {
       colors: const [
         Colors.green,
         Colors.blue,
-        Colors.pink
+        Colors.pink,
+        Colors.red,
+        Colors.yellow
       ], // manually specify the colors to be used
       strokeWidth: 1,
       strokeColor: Colors.white,

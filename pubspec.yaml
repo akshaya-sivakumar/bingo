@@ -48,6 +48,7 @@ dependencies:
   confetti: ^0.7.0
   flutter_bloc: ^8.1.1
   bloc_concurrency: ^0.2.0
+  lottie: ^1.4.2
 
 dev_dependencies:
   flutter_test:
