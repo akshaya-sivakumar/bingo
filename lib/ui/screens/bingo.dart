@@ -106,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       onTap: () async {
         if (state.start == false) {
-          Navigator.pop(context);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/initgame", (route) => false);
         } else {
           BlocProvider.of<BingoBlocBloc>(context).add(BingoCloseEvent());
         }

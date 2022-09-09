@@ -186,10 +186,8 @@ class _JoinGameState extends State<JoinGame> {
                                                                     300),
                                                         enableActiveFill: true,
                                                         // errorAnimationController: errorController,
-
                                                         keyboardType:
-                                                            TextInputType
-                                                                .number,
+                                                            TextInputType.text,
                                                         boxShadows: const [
                                                           BoxShadow(
                                                             offset:

@@ -35,6 +35,7 @@ class _LoginState extends State<Login> {
               "assets/images/bingobg.png",
               fit: BoxFit.cover,
               height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
             ),
             Container(
               height: MediaQuery.of(context).size.height,
@@ -62,25 +63,36 @@ class _LoginState extends State<Login> {
                           width: MediaQuery.of(context).size.width * 0.8,
                         ),
                       ),
-                      SizedBox(
-                          width: 290,
-                          child: Text(
-                            "Enter your name to begin a game",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.carterOne(
-                              color: Colors.tealAccent,
-                              fontSize: 24.0,
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.pink),
+                            borderRadius: BorderRadius.circular(25),
+                            color: Colors.blue.withOpacity(0.5)),
+                        padding: EdgeInsets.all(5),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                                width: 290,
+                                child: Text(
+                                  "Enter your name to begin a game",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.cormorantSc(
+                                      color: Colors.white,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              child: TextFieldWidget(
+                                  color: Colors.white,
+                                  onChanged: (e) {
+                                    AppConstants.user = e;
+                                  },
+                                  controller: namecontroller,
+                                  title: "Type here..."),
                             ),
-                          )),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextFieldWidget(
-                            color: Colors.white,
-                            onChanged: (e) {
-                              AppConstants.user = e;
-                            },
-                            controller: namecontroller,
-                            title: "Enter your name"),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 20,
@@ -90,25 +102,10 @@ class _LoginState extends State<Login> {
                           Navigator.pushNamed(context, "/initgame");
                         },
                         child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 1),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8.0)),
-                            gradient: LinearGradient(colors: [
-                              Colors.pink[800]!,
-                              Colors.red[200]!,
-                            ]),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 30),
-                          child: Text(
-                            "Play BINGO",
-                            style: GoogleFonts.alfaSlabOne(
-                                color: Colors.white,
-                                //  fontWeight: FontWeight.w900,
-                                fontSize: 17),
-                          ),
-                        ),
+                            child: Image.asset(
+                          "assets/images/playbtn.png",
+                          width: MediaQuery.of(context).size.width * 0.5,
+                        )),
                       )
                     ],
                   ),

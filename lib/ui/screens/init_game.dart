@@ -31,38 +31,48 @@ class _InitGameState extends State<InitGame> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.deepPurple.withOpacity(0.4),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Colors.pinkAccent.withOpacity(0.5),
-              Colors.purpleAccent,
-              Colors.blueAccent.withOpacity(0.5),
-            ],
-          )),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/images/bingo_name.png",
-                  width: MediaQuery.of(context).size.width * 0.8,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                cardWidget(context, "Join a game", Colors.blueAccent),
-                const SizedBox(
-                  height: 20,
-                ),
-                cardWidget(context, "Host a game", Colors.pinkAccent)
-              ],
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              "assets/images/bingobg.png",
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height,
             ),
-          ),
+            Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.pinkAccent.withOpacity(0.6),
+                  Colors.purpleAccent,
+                  Colors.blueAccent.withOpacity(0.6),
+                ],
+              )),
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/bingo_name.png",
+                      width: MediaQuery.of(context).size.width * 0.8,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    cardWidget(context, "Join a game", Colors.blueAccent),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    cardWidget(context, "Host a game", Colors.pinkAccent)
+                  ],
+                ),
+              ),
+            ),
+          ],
         ));
   }
 

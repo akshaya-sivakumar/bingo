@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bingo/ui/screens/join_game.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -68,7 +69,7 @@ class _CodePageState extends State<CodePage> {
                                   fontSize: 30, color: Colors.white),
                             ),
                             SizedBox(
-                              height: 500,
+                              height: 550,
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [
@@ -79,7 +80,7 @@ class _CodePageState extends State<CodePage> {
                                             BorderRadius.circular(30)),
                                     child: Container(
                                       padding: const EdgeInsets.all(30),
-                                      height: 400,
+                                      height: 450,
                                       decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             begin: Alignment.topRight,
@@ -127,42 +128,8 @@ class _CodePageState extends State<CodePage> {
                                             const SizedBox(
                                               height: 20,
                                             ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.7,
-                                              child: TextButton(
-                                                  style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          Colors.pink),
-                                                  onPressed: () {},
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        "Share ",
-                                                        style: GoogleFonts
-                                                            .akayaKanadaka(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 22),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          _onShareWithResult(
-                                                              context);
-                                                        },
-                                                        child: const Icon(
-                                                          Icons.share,
-                                                          color: Colors.white,
-                                                        ),
-                                                      )
-                                                    ],
-                                                  )),
-                                            )
+                                            shareButton(context),
+                                            enterroomButton(context)
                                           ],
                                         ),
                                       ),
@@ -203,6 +170,57 @@ class _CodePageState extends State<CodePage> {
             ],
           ),
         ));
+  }
+
+  SizedBox shareButton(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: TextButton(
+          style: TextButton.styleFrom(backgroundColor: Colors.pink),
+          onPressed: () {
+            _onShareWithResult(context);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Share ",
+                style: GoogleFonts.akayaKanadaka(
+                    color: Colors.white, fontSize: 22),
+              ),
+              const Icon(
+                Icons.share,
+                color: Colors.white,
+              )
+            ],
+          )),
+    );
+  }
+
+  SizedBox enterroomButton(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: TextButton(
+          style: TextButton.styleFrom(backgroundColor: Colors.blue),
+          onPressed: () {
+            JoinGame.gamecode = code ?? "";
+            Navigator.of(context).pushNamed("/bingo");
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Enter into the room ",
+                style: GoogleFonts.akayaKanadaka(
+                    color: Colors.white, fontSize: 22),
+              ),
+              const Icon(
+                Icons.login,
+                color: Colors.white,
+              )
+            ],
+          )),
+    );
   }
 
   void _onShareWithResult(BuildContext context) async {
