@@ -93,9 +93,7 @@ class _BlastState extends State<Blast> {
   }
 
   static Path drawStar(Size size) {
-    // Method to convert degree to radians
     double degToRad(double deg) => deg * (pi / 180.0);
-
     const numberOfPoints = 5;
     final halfWidth = size.width / 2;
     final externalRadius = halfWidth;
@@ -105,7 +103,6 @@ class _BlastState extends State<Blast> {
     final path = Path();
     final fullAngle = degToRad(360);
     path.moveTo(size.width, halfWidth);
-
     for (double step = 0; step < fullAngle; step += degreesPerStep) {
       path.lineTo(halfWidth + externalRadius * cos(step),
           halfWidth + externalRadius * sin(step));
