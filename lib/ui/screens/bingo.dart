@@ -34,18 +34,24 @@ class _MyHomePageState extends State<MyHomePage> {
       child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
         builder: (context, state) {
           if (state is BingoClosestate) {
+            if (state.opponentLeft) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("${state.username} left"),
+                  duration: const Duration(seconds: 10),
+                ));
+              });
+            } else {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil("/initgame", (route) => false);
+              });
+            }
+          } else if (state.won) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               DialogWidget.hostDialog(context, state.winnerName.toString());
             });
-          }
-
-          if (state.won) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              DialogWidget.hostDialog(context, state.winnerName.toString());
-            });
-          }
-
-          if (state is BingoProgressstate) {
+          } else if (state is BingoProgressstate) {
             return Container();
           }
           /* if (state is BingoBlocState && !state.won && state.start) {
@@ -115,7 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.of(context)
               .pushNamedAndRemoveUntil("/initgame", (route) => false);
         } else {
-          BlocProvider.of<BingoBlocBloc>(context).add(BingoCloseEvent());
+          BlocProvider.of<BingoBlocBloc>(context).add(BingoAddEvent(
+              BingoModel(name: AppConstants.user, value: "Exit")));
         }
       },
     );

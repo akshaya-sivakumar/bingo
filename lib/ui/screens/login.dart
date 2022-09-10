@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.pink),
                             borderRadius: BorderRadius.circular(25),
-                            color: Colors.blue.withOpacity(0.5)),
+                            color: Colors.purple.shade200),
                         padding: EdgeInsets.all(5),
                         child: Column(
                           children: [
@@ -76,8 +76,8 @@ class _LoginState extends State<Login> {
                                 child: Text(
                                   "Enter your name to begin a game",
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.cormorantSc(
-                                      color: Colors.white,
+                                  style: GoogleFonts.almendraSc(
+                                      color: Colors.pink,
                                       fontSize: 24.0,
                                       fontWeight: FontWeight.bold),
                                 )),

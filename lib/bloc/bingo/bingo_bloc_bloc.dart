@@ -25,7 +25,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
     autoGenerate();
 
     gamesink();
-    gameClose();
+    // gameClose();
   }
 
   void gamestart() {
@@ -53,7 +53,13 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
         print(event.message);
       }
       BingoModel bingoDetail = BingoModel.fromJson(json.decode(event.message));
-      if (bingoDetail.value == "winner") {
+      if (bingoDetail.value == "Exit") {
+        if (bingoDetail.name == AppConstants.user) {
+          emit(BingoClosestate(false, bingoDetail.name));
+        } else {
+          emit(BingoClosestate(true, bingoDetail.name));
+        }
+      } else if (bingoDetail.value == "winner") {
         channels?.sink.close();
         if (kDebugMode) {
           print(bingoDetail.value);
@@ -77,12 +83,12 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
     });
   }
 
-  void gameClose() {
+  /*  void gameClose() {
     on<BingoCloseEvent>((event, emit) async {
       channels?.sink.close();
       emit(BingoClosestate());
     });
-  }
+  } */
 
   void gamesink() {
     on<BingoAddEvent>((event, emit) async {
