@@ -25,7 +25,7 @@ class _JoinGameState extends State<JoinGame> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.deepPurple.withOpacity(0.4),
-        body: Container(
+        body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             alignment: Alignment.center,

@@ -13,13 +13,21 @@ class DialogWidget {
     AwesomeDialog(
       dismissOnBackKeyPress: false,
       dismissOnTouchOutside: false,
-      dialogBackgroundColor: Colors.white,
-      context: context,
+      dialogBackgroundColor: Colors.pink.shade100,
+      context: context, bodyHeaderDistance: 0,
+      dialogBorderRadius: BorderRadius.circular(50),
+      isDense: false,
+
+      // closeIcon: Icon(Icons.close),
+      // showCloseIcon: true,
       // ignore: deprecated_member_use
-      animType: AnimType.SCALE,
+      animType: AnimType.bottomSlide,
+      borderSide: const BorderSide(color: Colors.pink, width: 2),
+      barrierColor: Colors.orangeAccent.withOpacity(0.5),
+      padding: EdgeInsets.zero,
       customHeader: CircleAvatar(
         radius: 50,
-        backgroundColor: Colors.green.withOpacity(0.1),
+        backgroundColor: Colors.white.withOpacity(0.5),
         child: Lottie.asset(
           AppConstants.user == name
               ? "assets/images/winners.json"
@@ -30,17 +38,48 @@ class DialogWidget {
       ),
       body: StatefulBuilder(builder: (context, setstate) {
         return Center(
-          child: Padding(
-              padding: const EdgeInsets.only(top: 20),
+          child: Container(
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                // color: Colors.pinkAccent.withOpacity(0.4),
+                image: const DecorationImage(
+                  image: AssetImage(
+                    "assets/images/popupbg.png",
+                  ),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              height: MediaQuery.of(context).size.height * 0.3,
+              // padding: const EdgeInsets.only(top: 20),
               child: Stack(
-                alignment: Alignment.center,
+                alignment: Alignment.topCenter,
                 children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      name == AppConstants.user ? name + " wins" : "You lose",
-                      style: GoogleFonts.akayaKanadaka(
-                          fontWeight: FontWeight.bold, fontSize: 25),
+                  // if (name == AppConstants.user)
+                  Positioned(
+                      top: 0,
+                      child: Image.asset(
+                        name == AppConstants.user
+                            ? "assets/images/congrats.png"
+                            : "assets/images/oops.png",
+                        width: 300,
+                        height: 200,
+                        fit: BoxFit.fill,
+                      )),
+                  Positioned(
+                    top: name == AppConstants.user ? 150 : 160,
+                    child: InkWell(
+                      onTap: () {},
+                      child: Text(
+                        name == AppConstants.user ? "You wins !" : "You lose !",
+                        style: GoogleFonts.adamina(
+                            color: name == AppConstants.user
+                                ? Colors.white
+                                : Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 25),
+                      ),
                     ),
                   ),
                   if (name == AppConstants.user)
@@ -63,6 +102,7 @@ class DialogWidget {
         },
         child: Image.asset(
           "assets/images/replay.png",
+          fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width * 0.4,
         ),
       ),
@@ -73,6 +113,7 @@ class DialogWidget {
         },
         child: Image.asset(
           "assets/images/quit.png",
+          fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width * 0.4,
         ),
       ),
@@ -122,7 +163,7 @@ class _BlastState extends State<Blast> {
     );
   }
 
-  static Path drawStar(Size size) {
+  /* static Path drawStar(Size size) {
     double degToRad(double deg) => deg * (pi / 180.0);
     const numberOfPoints = 5;
     final halfWidth = size.width / 2;
@@ -141,5 +182,5 @@ class _BlastState extends State<Blast> {
     }
     path.close();
     return path;
-  }
+  } */
 }

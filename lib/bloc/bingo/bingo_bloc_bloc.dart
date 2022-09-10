@@ -157,7 +157,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
         number += 1;
       }
     }
-    print(state.numberList);
+   
   }
 
   List shuffle(List array) {

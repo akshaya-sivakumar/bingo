@@ -23,9 +23,9 @@ class _CodePageState extends State<CodePage> {
     super.initState();
   }
 
-  String _chars =
+  final String _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  Random _rnd = Random();
+  final Random _rnd = Random();
 
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
@@ -225,6 +225,7 @@ class _CodePageState extends State<CodePage> {
 
   void _onShareWithResult(BuildContext context) async {
     final box = context.findRenderObject() as RenderBox?;
+    // ignore: unused_local_variable
     ShareResult result;
 
     if (code != "") {

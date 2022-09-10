@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:audioplayers/audioplayers.dart';
+
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
-import 'package:bingo/ui/screens/join_game.dart';
+
 import 'package:bingo/ui/widgets/bingo_box.dart';
 import 'package:bingo/ui/widgets/bingo_name.dart';
 import 'package:bingo/ui/widgets/bingo_scaffold.dart';
@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(JoinGame.gamecode);
+   
     return Bingoscaffold(
       child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
         builder: (context, state) {

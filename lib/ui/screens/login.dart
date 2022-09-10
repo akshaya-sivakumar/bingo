@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
                             border: Border.all(color: Colors.pink),
                             borderRadius: BorderRadius.circular(25),
                             color: Colors.purple.shade200),
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Column(
                           children: [
                             SizedBox(
@@ -101,11 +101,10 @@ class _LoginState extends State<Login> {
                         onTap: () {
                           Navigator.pushNamed(context, "/initgame");
                         },
-                        child: Container(
-                            child: Image.asset(
+                        child: Image.asset(
                           "assets/images/playbtn.png",
                           width: MediaQuery.of(context).size.width * 0.5,
-                        )),
+                        ),
                       )
                     ],
                   ),

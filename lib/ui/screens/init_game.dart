@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_socket_channel/io.dart';
 
+import '../widgets/dialog_widget.dart';
+
 class InitGame extends StatefulWidget {
   const InitGame({super.key});
 
@@ -82,25 +84,29 @@ class _InitGameState extends State<InitGame> {
         if (title == "Join a game") {
           Navigator.of(context).pushNamed("/joinGame");
         } else {
-          hostDialog(context);
+          DialogWidget.hostDialog(context, "Akshu".toString());
+          // hostDialog(context);
         }
       },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-              color: color, borderRadius: BorderRadius.circular(20)),
-          height: 100,
-          width: MediaQuery.of(context).size.width * 0.7,
-          child: Center(
-              child: Text(
-            title,
-            style: GoogleFonts.alegreyaSc(
-                fontWeight: FontWeight.w900, fontSize: 25, color: Colors.white),
-          )),
-        ),
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                title != "Join a game"
+                    ? "assets/images/initgame.png"
+                    : "assets/images/host.png",
+              ),
+              fit: BoxFit.fill,
+            ),
+            borderRadius: BorderRadius.circular(20)),
+        height: 120,
+        width: MediaQuery.of(context).size.width * 0.7,
+        child: Center(
+            child: Text(
+          title,
+          style: GoogleFonts.alegreyaSc(
+              fontWeight: FontWeight.w900, fontSize: 25, color: Colors.white),
+        )),
       ),
     );
   }
