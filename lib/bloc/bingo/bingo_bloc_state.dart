@@ -27,5 +27,5 @@ class BingoClosestate extends BingoBlocState {
   final bool opponentLeft;
   final String username;
 
-  BingoClosestate(this.opponentLeft,this.username);
+  BingoClosestate(this.opponentLeft, this.username);
 }
