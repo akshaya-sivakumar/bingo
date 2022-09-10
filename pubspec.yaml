@@ -53,6 +53,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   audioplayers: ^1.0.1
   fab_circular_menu: ^1.0.2
+  async: ^2.8.2
 
 dev_dependencies:
   flutter_test:

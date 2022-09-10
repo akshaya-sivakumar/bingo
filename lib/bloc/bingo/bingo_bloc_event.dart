@@ -26,3 +26,9 @@ class BingoCloseEvent extends BingoBlocEvent {
 
   BingoCloseEvent(this.message);
 }
+
+class BingohostEvent extends BingoBlocEvent {
+  final String gamecode;
+
+  BingohostEvent(this.gamecode);
+}

@@ -11,6 +11,7 @@ abstract class BingoBlocState {
   bool won = false;
   String? winnerName;
   bool opponentMove = false;
+  bool userJoined = false;
 }
 
 // ignore: must_be_immutable

@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
                             Container(
                               height: 250,
                               width: 450,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
                                       image: AssetImage(
@@ -87,6 +87,7 @@ class _LoginState extends State<Login> {
                                 fit: BoxFit.fill,
                                 height: 250,
                                 width: 450,
+                                color: Colors.deepPurple.withOpacity(0.1),
                               ),
                             ),
                             Container(

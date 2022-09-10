@@ -30,7 +30,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     );
   } else if (settings.name == "/codepage") {
     return MaterialPageRoute(
-      builder: (_) => const CodePage(),
+      builder: (_) => BlocProvider(
+        create: (context) => BingoBlocBloc(),
+        child: CodePage(),
+      ),
     );
   } else {
     return _errorRoute();

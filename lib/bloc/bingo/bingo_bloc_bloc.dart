@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:async/async.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bingo/constants.dart';
+import 'package:bingo/ui/screens/generate_code.dart';
 import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
@@ -20,12 +22,14 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
   IOWebSocketChannel? channels;
   BingoDonestate bingoDonestate = BingoDonestate();
   BingoBlocBloc() : super(BingoBlocInitial()) {
+    gameHost();
     gamestart();
     gamestream();
 
     autoGenerate();
 
     gamesink();
+
     // gameClose();
   }
 
@@ -34,11 +38,13 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
       emit(bingoDonestate
         ..numberList = event.numberList
         ..start = true);
+      channels?.sink.close();
       channels = IOWebSocketChannel.connect(Uri.parse(
-          'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${JoinGame.gamecode}'));
-
+          'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${JoinGame.gamecode}/${CodePage.type}/2'));
+      print("connected ${JoinGame.gamecode} ${CodePage.type}");
       generateList();
       await emit.onEach(channels!.stream, onData: (message) {
+        print(message);
         if (MyHomePage.musicPlay) {
           AudioPlayer().play(
             AssetSource('audio/tone.mp3'),
@@ -46,17 +52,48 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
         }
         add(BingoStreamEvent(message.toString()));
       });
-    }, transformer: restartable());
+    }, transformer: sequential());
   }
+
+  void gameHost() {
+    on<BingohostEvent>((event, emit) async {
+      channels = IOWebSocketChannel.connect(Uri.parse(
+          'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${event.gamecode}/${CodePage.type}/2'));
+      print("connected ${event.gamecode} ${CodePage.type}");
+
+      if (CodePage.type == "join") {
+        channels?.sink.add(json
+            .encode(BingoModel(name: "akshaya", value: "Joined"))
+            .toString());
+      }
+
+      await emit.onEach(channels!.stream, onData: (message) {
+        print("streaming");
+        if (MyHomePage.musicPlay) {
+          AudioPlayer().play(
+            AssetSource('audio/tone.mp3'),
+          );
+        }
+        add(BingoStreamEvent(message.toString()));
+      });
+    }, transformer: sequential());
+  }
+
+  CancelableOperation? dataStreaming;
 
   void gamestream() {
     on<BingoStreamEvent>((event, emit) async {
       emit(BingoProgressstate());
       if (kDebugMode) {
-        print(event.message);
+        // print(event.message);
       }
       BingoModel bingoDetail = BingoModel.fromJson(json.decode(event.message));
-      if (bingoDetail.value == "Exit") {
+      if (bingoDetail.value == "Joined") {
+        if (CodePage.type == "host") {
+          bingoDonestate.userJoined = true;
+          emit(bingoDonestate);
+        }
+      } else if (bingoDetail.value == "Exit") {
         if (bingoDetail.name == AppConstants.user) {
           emit(BingoClosestate(false, bingoDetail.name));
         } else {
@@ -174,5 +211,12 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
       array[n] = temp;
     }
     return array;
+  }
+
+
+  @override
+  Future<void> close() async {
+    channels?.sink.close();
+    super.close();
   }
 }

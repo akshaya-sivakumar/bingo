@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import 'generate_code.dart';
+
 class JoinGame extends StatefulWidget {
   static String gamecode = "";
   const JoinGame({super.key});
@@ -231,6 +233,7 @@ class _JoinGameState extends State<JoinGame> {
                                                         backgroundColor:
                                                             Colors.pink),
                                                     onPressed: () {
+                                                      CodePage.type = "join";
                                                       JoinGame.gamecode =
                                                           codecontroller.text;
                                                       Navigator.of(context)

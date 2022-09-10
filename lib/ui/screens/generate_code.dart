@@ -1,12 +1,15 @@
 import 'dart:math';
 
+import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
 import 'package:bingo/ui/screens/join_game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CodePage extends StatefulWidget {
+  static String? type;
   const CodePage({super.key});
 
   @override
@@ -16,10 +19,23 @@ class CodePage extends StatefulWidget {
 class _CodePageState extends State<CodePage> {
   TextEditingController codecontroller = TextEditingController();
   String? code;
+  late BingoBlocBloc bingobloc;
 
   @override
   void initState() {
+    CodePage.type = "host";
+    bingobloc = BlocProvider.of<BingoBlocBloc>(context);
     code = getRandomString(6);
+    JoinGame.gamecode = code ?? "";
+
+    bingobloc.add(BingohostEvent(code ?? ""));
+    bingobloc.stream.listen((event) {
+      if (event.userJoined) {
+        print("userJoined- " + event.userJoined.toString());
+        bingobloc.close();
+        Navigator.of(context).pushReplacementNamed("/bingo");
+      }
+    });
     super.initState();
   }
 
@@ -204,6 +220,7 @@ class _CodePageState extends State<CodePage> {
           style: TextButton.styleFrom(backgroundColor: Colors.blue),
           onPressed: () {
             JoinGame.gamecode = code ?? "";
+
             Navigator.of(context).pushNamed("/bingo");
           },
           child: Row(
