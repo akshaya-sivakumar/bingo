@@ -64,32 +64,75 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(
+                        height: 250, width: 450,
+                        //  width: MediaQuery.of(context).size.width * 0.8,
+                        /* decoration: BoxDecoration(
                             border: Border.all(color: Colors.pink),
                             borderRadius: BorderRadius.circular(25),
-                            color: Colors.purple.shade200),
+                            color: Colors.purple.shade200), */
                         padding: const EdgeInsets.all(5),
-                        child: Column(
+                        child: Stack(
+                          alignment: Alignment.center,
                           children: [
-                            SizedBox(
-                                width: 290,
-                                child: Text(
-                                  "Enter your name to begin a game",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.almendraSc(
-                                      color: Colors.pink,
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              child: TextFieldWidget(
-                                  color: Colors.white,
-                                  onChanged: (e) {
-                                    AppConstants.user = e;
-                                  },
-                                  controller: namecontroller,
-                                  title: "Type here..."),
+                            Container(
+                              height: 250,
+                              width: 450,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(
+                                          "assets/images/initgame.png"))),
+                              child: Image.asset(
+                                "assets/images/initgame.png",
+                                fit: BoxFit.fill,
+                                height: 250,
+                                width: 450,
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              height: 200,
+                              width: 450,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                      width: 250,
+                                      child: Text(
+                                        "Enter your name to begin a game",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.alegreyaSansSc(
+                                            color: Colors.black,
+                                            shadows: [
+                                              Shadow(
+                                                offset: Offset(3.0, 3.0),
+                                                blurRadius: 3.0,
+                                                color: Colors.pink,
+                                              ),
+                                              Shadow(
+                                                offset: Offset(3.0, 3.0),
+                                                blurRadius: 8.0,
+                                                color: Colors.pink,
+                                              ),
+                                            ],
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w900),
+                                      )),
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.8,
+                                    child: TextFieldWidget(
+                                        color: Colors.white,
+                                        onChanged: (e) {
+                                          AppConstants.user = e;
+                                        },
+                                        controller: namecontroller,
+                                        title: "Type here..."),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

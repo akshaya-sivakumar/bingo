@@ -1,12 +1,12 @@
 import 'dart:math' as math;
 
-
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
 
 import 'package:bingo/ui/widgets/bingo_box.dart';
 import 'package:bingo/ui/widgets/bingo_name.dart';
 import 'package:bingo/ui/widgets/bingo_scaffold.dart';
 import 'package:bingo/ui/widgets/dialog_widget.dart';
+import 'package:fab_circular_menu/fab_circular_menu.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 
 class MyHomePage extends StatefulWidget {
+  static bool musicPlay = true;
   const MyHomePage({super.key});
 
   @override
@@ -29,58 +30,98 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-   
     return Bingoscaffold(
-      child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
-        builder: (context, state) {
-          if (state is BingoClosestate) {
-            if (state.opponentLeft) {
+        child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
+          builder: (context, state) {
+            if (state is BingoClosestate) {
+              if (state.opponentLeft) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("${state.username} left"),
+                    duration: const Duration(seconds: 10),
+                  ));
+                });
+              } else {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil("/initgame", (route) => false);
+                });
+              }
+            } else if (state.won) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("${state.username} left"),
-                  duration: const Duration(seconds: 10),
-                ));
+                DialogWidget.hostDialog(context, state.winnerName.toString());
               });
-            } else {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil("/initgame", (route) => false);
-              });
+            } else if (state is BingoProgressstate) {
+              return Container();
             }
-          } else if (state.won) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              DialogWidget.hostDialog(context, state.winnerName.toString());
-            });
-          } else if (state is BingoProgressstate) {
-            return Container();
-          }
-          /* if (state is BingoBlocState && !state.won && state.start) {
+            /* if (state is BingoBlocState && !state.won && state.start) {
             AudioPlayer().play(
               AssetSource('audio/tone.mp3'),
             );
           } */
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset("assets/images/bingo_name.png"),
-              bingoTable(state, context),
-              BingoName(state.bingoList.length),
-              if (state.opponentMove) turnCheck(context, state),
-              if (!state.numberList.expand((element) => element).contains("") &&
-                  !state.start)
-                startButton(context, state),
-              if (state.start == true)
-                const SizedBox(
-                  height: 30,
-                ),
-              exitButton(context, state)
-            ],
-          );
-        },
-      ),
-    );
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset("assets/images/bingo_name.png"),
+                bingoTable(state, context),
+                BingoName(state.bingoList.length),
+                if (state.opponentMove) turnCheck(context, state),
+                if (!state.numberList
+                        .expand((element) => element)
+                        .contains("") &&
+                    !state.start)
+                  startButton(context, state),
+                if (state.start == true)
+                  const SizedBox(
+                    height: 30,
+                  ),
+                exitButton(context, state)
+              ],
+            );
+          },
+        ),
+        floatingButton: FabCircularMenu(
+            fabMargin: EdgeInsets.all(0),
+            fabSize: 60,
+            fabElevation: 0,
+            ringDiameter: 310,
+            fabCloseColor: Colors.pink.shade300,
+            fabOpenColor: Colors.pink.shade300,
+            ringColor: Colors.pink.withOpacity(0.5),
+            fabOpenIcon: Image.asset(
+              "assets/images/setting.png",
+              fit: BoxFit.cover,
+            ),
+            children: <Widget>[
+              InkWell(
+                  child: Image.asset(
+                    MyHomePage.musicPlay
+                        ? "assets/images/music.png"
+                        : "assets/images/musicoff.png",
+                    width: 60,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      MyHomePage.musicPlay = !MyHomePage.musicPlay;
+                    });
+                  }),
+              InkWell(
+                  child: Image.asset(
+                    "assets/images/autofill.png",
+                    width: 55,
+                  ),
+                  onTap: () {
+                    print('Favorite');
+                  }),
+              InkWell(
+                  child: Image.asset(
+                    "assets/images/exitIcon.png",
+                    width: 60,
+                  ),
+                  onTap: () {}),
+            ]));
   }
 
   Container turnCheck(BuildContext context, BingoBlocState state) {
@@ -210,10 +251,9 @@ class _MyHomePageState extends State<MyHomePage> {
             BingoBox(number: state.numberList[i][j]),
             if (state.selectedList.contains(state.numberList[i][j]) &&
                 state.numberList[i][j] != "")
-              const Icon(
-                Icons.close,
-                size: 55,
-                color: Colors.deepPurple,
+              Image.asset(
+                "assets/images/cross.png",
+                width: 51,
               ),
           ],
         ),

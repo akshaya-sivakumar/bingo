@@ -84,8 +84,8 @@ class _InitGameState extends State<InitGame> {
         if (title == "Join a game") {
           Navigator.of(context).pushNamed("/joinGame");
         } else {
-          DialogWidget.hostDialog(context, "Akshu".toString());
-          // hostDialog(context);
+          // DialogWidget.hostDialog(context, "Akshu".toString());
+          hostDialog(context);
         }
       },
       child: Container(

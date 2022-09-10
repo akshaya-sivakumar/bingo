@@ -11,6 +11,7 @@ import 'package:matrix2d/matrix2d.dart';
 import 'package:web_socket_channel/io.dart';
 
 import '../../model/bingo_model.dart';
+import '../../ui/screens/bingo.dart';
 
 part 'bingo_bloc_event.dart';
 part 'bingo_bloc_state.dart';
@@ -38,9 +39,11 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
 
       generateList();
       await emit.onEach(channels!.stream, onData: (message) {
-        AudioPlayer().play(
-          AssetSource('audio/tone.mp3'),
-        );
+        if (MyHomePage.musicPlay) {
+          AudioPlayer().play(
+            AssetSource('audio/tone.mp3'),
+          );
+        }
         add(BingoStreamEvent(message.toString()));
       });
     }, transformer: restartable());
