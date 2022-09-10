@@ -55,17 +55,26 @@ class DialogWidget {
       title: 'This is Ignored',
       desc: 'This is also Ignored',
       // btnCancelOnPress: () {},
-      btnOkOnPress: () {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil("/initgame", (r) => false);
-      },
-      btnOk: Image.asset(
-        "assets/images/replay.png",
-        width: MediaQuery.of(context).size.width * 0.4,
+      btnOkOnPress: () {},
+      btnOk: InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/initgame", (r) => false);
+        },
+        child: Image.asset(
+          "assets/images/replay.png",
+          width: MediaQuery.of(context).size.width * 0.4,
+        ),
       ),
-      btnCancel: Image.asset(
-        "assets/images/quit.png",
-        width: MediaQuery.of(context).size.width * 0.4,
+      btnCancel: InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/initgame", (r) => false);
+        },
+        child: Image.asset(
+          "assets/images/quit.png",
+          width: MediaQuery.of(context).size.width * 0.4,
+        ),
       ),
     ).show();
   }

@@ -35,8 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, state) {
           if (state is BingoClosestate) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/initgame", (route) => false);
+              DialogWidget.hostDialog(context, state.winnerName.toString());
             });
           }
 

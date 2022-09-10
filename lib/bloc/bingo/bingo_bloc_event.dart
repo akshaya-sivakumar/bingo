@@ -21,4 +21,6 @@ class BingoAddEvent extends BingoBlocEvent {
   BingoAddEvent(this.bingoData);
 }
 
-class BingoCloseEvent extends BingoBlocEvent {}
+class BingoCloseEvent extends BingoBlocEvent {
+// final String message;
+}
