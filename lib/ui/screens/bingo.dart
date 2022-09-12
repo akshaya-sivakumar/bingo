@@ -26,6 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
   bool autoFill = false;
   int number = 0;
 
@@ -38,12 +39,13 @@ class _MyHomePageState extends State<MyHomePage> {
           return Container();
         }
         return FabCircularMenu(
+            key: fabKey,
             onDisplayChange: (value) {
               print(value);
             },
-            fabMargin: EdgeInsets.all(0),
+            fabMargin: const EdgeInsets.all(0),
             fabSize: 60,
-            fabElevation: 0,
+            fabElevation: 10,
             ringDiameter: 310,
             fabCloseColor: Colors.pink.shade300,
             fabOpenColor: Colors.pink.shade300,
@@ -61,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 53,
                   ),
                   onTap: () {
-                    // Navigator.pop(context);
+                    fabKey.currentState?.close();
                     setState(() {
                       MyHomePage.musicPlay = !MyHomePage.musicPlay;
                     });
@@ -75,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 55,
                     ),
                     onTap: () {
-                      //  Navigator.pop(context);
+                      fabKey.currentState?.close();
                       autoFill = !autoFill;
                       BlocProvider.of<BingoBlocBloc>(context)
                           .add(BingoAutofillEvent(autoFill));
