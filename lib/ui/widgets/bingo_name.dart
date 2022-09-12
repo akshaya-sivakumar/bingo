@@ -19,8 +19,12 @@ class BingoName extends StatelessWidget {
             Colors.white,
             Colors.blue.shade200
           ]),
+          boxShadow: const [
+            BoxShadow(color: Colors.red, blurRadius: 10),
+          ],
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
+            width: 0.5,
             color: Colors.pink,
           )),
       width: 280.0,
@@ -38,6 +42,7 @@ class BingoName extends StatelessWidget {
                     style: GoogleFonts.chicle(
                         color: Colors.pink,
                         fontWeight: FontWeight.w900,
+                        shadows: [const Shadow(color: Colors.blue, blurRadius: 5)],
                         fontSize: 45),
                   ),
                   if (bingo >= i + 1)
