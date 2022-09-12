@@ -5,6 +5,8 @@ import 'package:bingo/ui/screens/generate_code.dart';
 import 'package:bingo/ui/screens/join_game.dart';
 import 'package:bingo/ui/screens/init_game.dart';
 import 'package:bingo/ui/screens/login.dart';
+import 'package:bingo/ui/screens/splash/animation.dart';
+import 'package:bingo/ui/screens/splash/home.dart';
 import 'package:bingo/ui/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +40,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     );
   } else if (settings.name == "/splash") {
     return MaterialPageRoute(
-      builder: (_) => const Splash(),
+      builder: (_) => Home(),
     );
   } else {
     return _errorRoute();

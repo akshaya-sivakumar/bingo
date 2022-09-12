@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     Timer(
-      const Duration(seconds: 2),
+      const Duration(seconds: 4),
       () => navigationPage(),
     );
     super.initState();
@@ -29,29 +31,43 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              color: Colors.pink.withOpacity(0.5),
-              child: Opacity(
-                opacity: 0.3,
-                child: Image.asset(
-                  "assets/images/bingobg.png",
-                  fit: BoxFit.cover,
-                  height: MediaQuery.of(context).size.height,
-                ),
+        body: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Container(
+              alignment: Alignment.center,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Opacity(
+                    opacity: 0.5,
+                    child: Image.asset(
+                      "assets/images/bingobg.png",
+                      fit: BoxFit.cover,
+                      height: MediaQuery.of(context).size.height,
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Colors.pinkAccent.withOpacity(0.3),
+                        Colors.purpleAccent,
+                        Colors.blue.withOpacity(0.3),
+                      ],
+                    )),
+                    child: SizedBox(
+                      width: 400,
+                      child: Lottie.asset("assets/images/bingo.json",
+                          fit: BoxFit.cover, repeat: true, width: 400),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(
-              width: 500,
-              child: Lottie.asset("assets/images/bingo.json",
-                  fit: BoxFit.cover, repeat: true, width: 500),
-            ),
-          ],
-        ),
-      ),
-    );
+            )));
   }
 }
