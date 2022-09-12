@@ -19,6 +19,7 @@ class _JoinGameState extends State<JoinGame> {
 
   @override
   void initState() {
+    
     myFocusNode = FocusNode();
     super.initState();
   }
@@ -233,6 +234,7 @@ class _JoinGameState extends State<JoinGame> {
                                                         backgroundColor:
                                                             Colors.pink),
                                                     onPressed: () {
+
                                                       CodePage.type = "join";
                                                       JoinGame.gamecode =
                                                           codecontroller.text;

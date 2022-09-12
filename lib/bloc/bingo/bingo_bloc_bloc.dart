@@ -38,7 +38,8 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
       emit(BingoProgressstate());
       emit(bingoDonestate
         ..numberList = event.numberList
-        ..start = true);
+        ..start = true
+        ..opponentMove = CodePage.type == "join");
       channels?.sink.close();
       channels = IOWebSocketChannel.connect(Uri.parse(
           'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${JoinGame.gamecode}/${CodePage.type}/2'));
@@ -70,7 +71,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
 
       if (CodePage.type == "join") {
         channels?.sink.add(json
-            .encode(BingoModel(name: "akshaya", value: "Joined"))
+            .encode(BingoModel(name: AppConstants.user, value: "Joined"))
             .toString());
       }
 
@@ -101,6 +102,8 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
         if (CodePage.type == "host") {
           bingoDonestate.userJoined = true;
           emit(bingoDonestate);
+        } else {
+          emit(bingoDonestate);
         }
       } else if (bingoDetail.value == "Exit") {
         if (bingoDetail.name == AppConstants.user) {
@@ -123,6 +126,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
           } else {
             bingoDonestate.opponentMove = false;
           }
+          print(bingoDonestate.opponentMove);
           bingoDonestate.selectedList.add(bingoDetail.value);
 
           checkBingo();
