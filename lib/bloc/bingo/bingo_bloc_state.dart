@@ -24,6 +24,9 @@ class BingoProgressstate extends BingoBlocState {}
 class BingoDonestate extends BingoBlocState {}
 
 // ignore: must_be_immutable
+
+
+// ignore: must_be_immutable
 class BingoClosestate extends BingoBlocState {
   final bool opponentLeft;
   final String username;

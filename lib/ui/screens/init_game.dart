@@ -113,129 +113,133 @@ class _InitGameState extends State<InitGame> {
 
   void hostDialog(BuildContext context) {
     AwesomeDialog(
-            dismissOnBackKeyPress: false,
-            dismissOnTouchOutside: false,
-            dialogBackgroundColor: const Color.fromRGBO(228, 171, 245, 0.5),
-            context: context,
-            // ignore: deprecated_member_use
-            animType: AnimType.SCALE,
-            customHeader: CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.pinkAccent.withOpacity(0.6),
-                child: Image.asset("assets/images/bingo_name.png")),
-            body: StatefulBuilder(builder: (context, setstate) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      onMenuStateChange: (isOpen) {},
-                      isExpanded: true,
-                      hint: Row(
-                        children: const [
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Expanded(
-                            child: Text(
-                              'Select Max No.of users',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                      items: ["2", "3"]
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.person,
-                                          color: Colors.white,
-                                        ),
-                                        const Icon(
-                                          Icons.person,
-                                          color: Colors.white,
-                                        ),
-                                        if (item == "3")
-                                          const Icon(
-                                            Icons.person,
-                                            color: Colors.white,
-                                          ),
-                                      ],
-                                    ),
-                                    Text(
-                                      item,
-                                      style: GoogleFonts.aBeeZee(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              ))
-                          .toList(),
-                      value: selectedValue,
-                      onChanged: (value) {
-                        setstate(() {
-                          selectedValue = value as String;
-                        });
-                      },
-                      icon: const Icon(
-                        Icons.keyboard_arrow_down,
-                      ),
-                      iconSize: 14,
-                      iconEnabledColor: Colors.yellow,
-                      iconDisabledColor: Colors.grey,
-                      buttonHeight: 50,
-                      buttonWidth: 250,
-                      buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                      buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
-                        color: Colors.pinkAccent.withOpacity(0.6),
-                      ),
-                      buttonElevation: 2,
-                      itemHeight: 40,
-                      itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                      dropdownMaxHeight: 200,
-                      dropdownWidth: 250,
-                      dropdownPadding:
-                          const EdgeInsets.only(left: 14, right: 14),
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: Colors.pink.shade100,
-                      ),
-                      //  dropdownElevation: 8,
-                      scrollbarRadius: const Radius.circular(40),
-                      scrollbarThickness: 6,
-                      scrollbarAlwaysShow: true,
-                      //offset: const Offset(-20, 0),
+      dismissOnBackKeyPress: false,
+      dismissOnTouchOutside: false,
+      dialogBackgroundColor: const Color.fromRGBO(228, 171, 245, 0.5),
+      context: context,
+      // ignore: deprecated_member_use
+      animType: AnimType.SCALE,
+      customHeader: CircleAvatar(
+          radius: 50,
+          backgroundColor: Colors.pinkAccent.withOpacity(0.6),
+          child: Image.asset("assets/images/bingo_name.png")),
+      body: StatefulBuilder(builder: (context, setstate) {
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton2(
+                onMenuStateChange: (isOpen) {},
+                isExpanded: true,
+                hint: Row(
+                  children: const [
+                    SizedBox(
+                      width: 4,
                     ),
-                  ),
+                    Expanded(
+                      child: Text(
+                        'Select Max No.of users',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            }),
-            title: 'This is Ignored',
-            desc: 'This is also Ignored',
-            btnCancelOnPress: () {},
-            btnOkOnPress: () {
-              Navigator.of(context).pushNamed("/codepage");
-            },
-            btnOkText: "Continue")
-        .show();
+                items: ["2", "3"]
+                    .map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                  ),
+                                  const Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                  ),
+                                  if (item == "3")
+                                    const Icon(
+                                      Icons.person,
+                                      color: Colors.white,
+                                    ),
+                                ],
+                              ),
+                              Text(
+                                item,
+                                style: GoogleFonts.aBeeZee(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ))
+                    .toList(),
+                value: selectedValue,
+                onChanged: (value) {
+                  setstate(() {
+                    selectedValue = value as String;
+                  });
+                },
+                icon: const Icon(
+                  Icons.keyboard_arrow_down,
+                ),
+                iconSize: 14,
+                iconEnabledColor: Colors.yellow,
+                iconDisabledColor: Colors.grey,
+                buttonHeight: 50,
+                buttonWidth: 250,
+                buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                buttonDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: Colors.black26,
+                  ),
+                  color: Colors.pinkAccent.withOpacity(0.6),
+                ),
+                buttonElevation: 2,
+                itemHeight: 40,
+                itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                dropdownMaxHeight: 200,
+                dropdownWidth: 250,
+                dropdownPadding: const EdgeInsets.only(left: 14, right: 14),
+                dropdownDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  color: Colors.pink.shade100,
+                ),
+                //  dropdownElevation: 8,
+                scrollbarRadius: const Radius.circular(40),
+                scrollbarThickness: 6,
+                scrollbarAlwaysShow: true,
+                //offset: const Offset(-20, 0),
+              ),
+            ),
+          ),
+        );
+      }),
+      title: 'This is Ignored',
+      desc: 'This is also Ignored',
+      btnCancel: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Image.asset("assets/images/cancel.png")),
+      btnOk: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.of(context).pushNamed("/codepage");
+          },
+          child: Image.asset("assets/images/continue.png")),
+    ).show();
   }
 }

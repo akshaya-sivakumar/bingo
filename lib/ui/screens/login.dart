@@ -44,9 +44,9 @@ class _LoginState extends State<Login> {
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
                 colors: [
-                  Colors.pinkAccent.withOpacity(0.3),
+                  Colors.pinkAccent.withOpacity(0.5),
                   Colors.purpleAccent,
-                  Colors.blue.withOpacity(0.3),
+                  Colors.blue.withOpacity(0.5),
                 ],
               )),
               child: SingleChildScrollView(
@@ -74,20 +74,23 @@ class _LoginState extends State<Login> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            Container(
-                              height: 250,
-                              width: 450,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/initgame.png"))),
-                              child: Image.asset(
-                                "assets/images/initgame.png",
-                                fit: BoxFit.fill,
+                            Opacity(
+                              opacity: 0.7,
+                              child: Container(
                                 height: 250,
                                 width: 450,
-                                color: Colors.deepPurple.withOpacity(0.1),
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(
+                                            "assets/images/initgame.png"))),
+                                child: Image.asset(
+                                  "assets/images/initgame.png",
+                                  fit: BoxFit.fill,
+                                  height: 250,
+                                  width: 450,
+                                  color: Colors.deepPurple.withOpacity(0.1),
+                                ),
                               ),
                             ),
                             Container(

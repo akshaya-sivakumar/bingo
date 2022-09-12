@@ -32,3 +32,9 @@ class BingohostEvent extends BingoBlocEvent {
 
   BingohostEvent(this.gamecode);
 }
+
+class BingoAutofillEvent extends BingoBlocEvent {
+  final bool autofill;
+
+  BingoAutofillEvent(this.autofill);
+}

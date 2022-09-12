@@ -26,7 +26,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
     gamestart();
     gamestream();
 
-    autoGenerate();
+    autofill();
 
     gamesink();
 
@@ -35,6 +35,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
 
   void gamestart() {
     on<BingoStartEvent>((event, emit) async {
+      emit(BingoProgressstate());
       emit(bingoDonestate
         ..numberList = event.numberList
         ..start = true);
@@ -130,6 +131,19 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
     });
   } */
 
+  void autofill() {
+    on<BingoAutofillEvent>((event, emit) async {
+      emit(BingoProgressstate());
+      print(event.autofill);
+      if (event.autofill) {
+        autoGenerate();
+        emit(bingoDonestate..numberList = state.numberList);
+      } else {
+        emit(BingoBlocInitial());
+      }
+    });
+  }
+
   void gamesink() {
     on<BingoAddEvent>((event, emit) async {
       channels?.sink.add(json.encode(event.bingoData).toString());
@@ -212,7 +226,6 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
     }
     return array;
   }
-
 
   @override
   Future<void> close() async {

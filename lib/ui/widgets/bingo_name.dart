@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,16 +23,16 @@ class BingoName extends StatelessWidget {
                 children: [
                   Text(
                     ["B", "I", "N", "G", "O"][i],
-                    style: GoogleFonts.alef(
+                    style: GoogleFonts.chicle(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
-                        fontSize: 40),
+                        fontSize: 45),
                   ),
                   if (bingo >= i + 1)
-                    const Icon(
+                    Icon(
                       Icons.check,
-                      size: 40,
-                      color: Colors.black,
+                      size: 47,
+                      color: Colors.red.shade900,
                     )
                 ],
               ),
