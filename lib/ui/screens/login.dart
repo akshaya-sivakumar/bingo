@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
                                   fit: BoxFit.fill,
                                   height: 250,
                                   width: 450,
-                                  color: Colors.deepPurple.withOpacity(0.1),
+                                  color: Colors.white.withOpacity(0.2),
                                 ),
                               ),
                             ),
@@ -106,7 +106,7 @@ class _LoginState extends State<Login> {
                                         "Enter your name to begin a game",
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.alegreyaSansSc(
-                                            color: Colors.black,
+                                            color: Colors.white,
                                             shadows: [
                                               const Shadow(
                                                 offset: Offset(3.0, 3.0),
@@ -123,8 +123,8 @@ class _LoginState extends State<Login> {
                                             fontWeight: FontWeight.w900),
                                       )),
                                   Container(
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     width:
                                         MediaQuery.of(context).size.width * 0.8,
                                     child: TextFieldWidget(
