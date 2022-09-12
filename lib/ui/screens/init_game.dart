@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_socket_channel/io.dart';
 
-import '../widgets/dialog_widget.dart';
+
 
 class InitGame extends StatefulWidget {
   const InitGame({super.key});

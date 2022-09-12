@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
 import 'package:bingo/ui/screens/join_game.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +32,9 @@ class _CodePageState extends State<CodePage> {
     bingobloc.add(BingohostEvent(code ?? ""));
     bingobloc.stream.listen((event) {
       if (event.userJoined) {
-        print("userJoined- " + event.userJoined.toString());
+        if (kDebugMode) {
+          print("userJoined- ${event.userJoined}");
+        }
         bingobloc.close();
         Navigator.of(context).pushReplacementNamed("/bingo");
       }

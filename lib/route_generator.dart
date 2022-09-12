@@ -32,7 +32,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     return MaterialPageRoute(
       builder: (_) => BlocProvider(
         create: (context) => BingoBlocBloc(),
-        child: CodePage(),
+        child: const CodePage(),
       ),
     );
   } else {

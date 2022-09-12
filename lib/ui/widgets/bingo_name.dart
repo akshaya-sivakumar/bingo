@@ -11,7 +11,7 @@ class BingoName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
           color: Colors.pink.shade100,
           borderRadius: BorderRadius.circular(25),

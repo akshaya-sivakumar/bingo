@@ -108,12 +108,12 @@ class _LoginState extends State<Login> {
                                         style: GoogleFonts.alegreyaSansSc(
                                             color: Colors.black,
                                             shadows: [
-                                              Shadow(
+                                              const Shadow(
                                                 offset: Offset(3.0, 3.0),
                                                 blurRadius: 3.0,
                                                 color: Colors.pink,
                                               ),
-                                              Shadow(
+                                              const Shadow(
                                                 offset: Offset(3.0, 3.0),
                                                 blurRadius: 8.0,
                                                 color: Colors.pink,
@@ -124,7 +124,7 @@ class _LoginState extends State<Login> {
                                       )),
                                   Container(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
+                                        const EdgeInsets.symmetric(horizontal: 10),
                                     width:
                                         MediaQuery.of(context).size.width * 0.8,
                                     child: TextFieldWidget(

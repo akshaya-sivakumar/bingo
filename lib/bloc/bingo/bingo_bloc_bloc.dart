@@ -42,10 +42,14 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
       channels?.sink.close();
       channels = IOWebSocketChannel.connect(Uri.parse(
           'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${JoinGame.gamecode}/${CodePage.type}/2'));
-      print("connected ${JoinGame.gamecode} ${CodePage.type}");
+      if (kDebugMode) {
+        print("connected ${JoinGame.gamecode} ${CodePage.type}");
+      }
       generateList();
       await emit.onEach(channels!.stream, onData: (message) {
-        print(message);
+        if (kDebugMode) {
+          print(message);
+        }
         if (MyHomePage.musicPlay) {
           AudioPlayer().play(
             AssetSource('audio/tone.mp3'),
@@ -60,7 +64,9 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
     on<BingohostEvent>((event, emit) async {
       channels = IOWebSocketChannel.connect(Uri.parse(
           'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${event.gamecode}/${CodePage.type}/2'));
-      print("connected ${event.gamecode} ${CodePage.type}");
+      if (kDebugMode) {
+        print("connected ${event.gamecode} ${CodePage.type}");
+      }
 
       if (CodePage.type == "join") {
         channels?.sink.add(json
@@ -69,7 +75,9 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
       }
 
       await emit.onEach(channels!.stream, onData: (message) {
-        print("streaming");
+        if (kDebugMode) {
+          print("streaming");
+        }
         if (MyHomePage.musicPlay) {
           AudioPlayer().play(
             AssetSource('audio/tone.mp3'),
@@ -134,7 +142,9 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
   void autofill() {
     on<BingoAutofillEvent>((event, emit) async {
       emit(BingoProgressstate());
-      print(event.autofill);
+      if (kDebugMode) {
+        print(event.autofill);
+      }
       if (event.autofill) {
         autoGenerate();
         emit(bingoDonestate..numberList = state.numberList);
