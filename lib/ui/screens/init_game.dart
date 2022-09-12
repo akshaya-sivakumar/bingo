@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_socket_channel/io.dart';
 
-
-
 class InitGame extends StatefulWidget {
   const InitGame({super.key});
 
@@ -112,9 +110,11 @@ class _InitGameState extends State<InitGame> {
   }
 
   void hostDialog(BuildContext context) {
+    selectedValue = "2";
     AwesomeDialog(
       dismissOnBackKeyPress: false,
       dismissOnTouchOutside: false,
+      dialogBorderRadius: BorderRadius.circular(50),
       dialogBackgroundColor: const Color.fromRGBO(228, 171, 245, 0.5),
       context: context,
       // ignore: deprecated_member_use
@@ -233,7 +233,9 @@ class _InitGameState extends State<InitGame> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Image.asset("assets/images/cancel.png")),
+          child: Image.asset(
+            "assets/images/cancel.png",
+          )),
       btnOk: InkWell(
           onTap: () {
             Navigator.pop(context);

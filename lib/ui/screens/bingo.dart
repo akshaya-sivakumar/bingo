@@ -47,11 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ringDiameter: 310,
             fabCloseColor: Colors.pink.shade300,
             fabOpenColor: Colors.pink.shade300,
-            fabCloseIcon: const Icon(
-              Icons.close,
-              size: 30,
-              color: Colors.white,
-            ),
+            fabCloseIcon: Image.asset("assets/images/cross.png"),
             ringColor: Colors.pink.withOpacity(0.5),
             fabOpenIcon: Image.asset(
               "assets/images/setting.png",

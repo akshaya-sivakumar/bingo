@@ -37,6 +37,8 @@ class TextFieldWidget extends StatelessWidget {
                 controller: controller,
                 validator: validator,
                 onChanged: onChanged,
+                autocorrect: true,
+
                 // autovalidateMode: AutovalidateMode.always,
                 style: Theme.of(context)
                     .textTheme
@@ -48,18 +50,18 @@ class TextFieldWidget extends StatelessWidget {
                     prefixIcon: leadingIcon,
                     hintText: title,
                     hintStyle:
-                        const TextStyle(color: Colors.white, fontSize: 14),
+                        const TextStyle(color: Colors.white, fontSize: 12),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: color ?? Colors.redAccent, width: 1.0),
+                            color: color ?? Colors.redAccent, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0)),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: color ?? Colors.redAccent, width: 1.0),
+                            color: color ?? Colors.redAccent, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0)),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: color ?? Colors.redAccent, width: 1.0),
+                            color: color ?? Colors.redAccent, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0)))),
           ),
         ],

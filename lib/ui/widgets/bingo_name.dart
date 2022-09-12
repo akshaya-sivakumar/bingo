@@ -14,6 +14,11 @@ class BingoName extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
           color: Colors.pink.shade100,
+          gradient: LinearGradient(colors: [
+            Colors.pink.shade200,
+            Colors.white,
+            Colors.blue.shade200
+          ]),
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
             color: Colors.pink,
@@ -24,7 +29,7 @@ class BingoName extends StatelessWidget {
         children: [
           for (int i = 0; i < ["B", "I", "N", "G", "O"].length; i++)
             SizedBox(
-              width: 50,
+              width: 45,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
