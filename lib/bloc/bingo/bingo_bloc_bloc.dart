@@ -40,29 +40,15 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
         ..numberList = event.numberList
         ..start = true
         ..opponentMove = CodePage.type == "join");
-      channels?.sink.close();
-      channels = IOWebSocketChannel.connect(Uri.parse(
-          'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${JoinGame.gamecode}/${CodePage.type}/2'));
-      if (kDebugMode) {
-        print("connected ${JoinGame.gamecode} ${CodePage.type}");
-      }
+
       generateList();
-      await emit.onEach(channels!.stream, onData: (message) {
-        if (kDebugMode) {
-          print(message);
-        }
-        if (MyHomePage.musicPlay) {
-          AudioPlayer().play(
-            AssetSource('audio/tone.mp3'),
-          );
-        }
-        add(BingoStreamEvent(message.toString()));
-      });
     }, transformer: sequential());
   }
 
   void gameHost() {
     on<BingohostEvent>((event, emit) async {
+      channels?.sink.close();
+
       channels = IOWebSocketChannel.connect(Uri.parse(
           'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${event.gamecode}/${CodePage.type}/2'));
       if (kDebugMode) {

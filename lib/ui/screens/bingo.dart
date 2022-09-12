@@ -33,10 +33,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int number = 0;
   @override
   void initState() {
-    if (CodePage.type == "join") {
-      BlocProvider.of<BingoBlocBloc>(context)
-          .add(BingohostEvent(JoinGame.gamecode));
-    }
+    BlocProvider.of<BingoBlocBloc>(context)
+        .add(BingohostEvent(JoinGame.gamecode));
+
     super.initState();
   }
 
