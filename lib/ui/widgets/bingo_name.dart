@@ -10,8 +10,15 @@ class BingoName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 250.0,
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      decoration: BoxDecoration(
+          color: Colors.pink.shade100,
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(
+            color: Colors.pink,
+          )),
+      width: 280.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -24,15 +31,15 @@ class BingoName extends StatelessWidget {
                   Text(
                     ["B", "I", "N", "G", "O"][i],
                     style: GoogleFonts.chicle(
-                        color: Colors.white,
+                        color: Colors.pink,
                         fontWeight: FontWeight.w900,
                         fontSize: 45),
                   ),
                   if (bingo >= i + 1)
-                    Icon(
+                    const Icon(
                       Icons.check,
-                      size: 47,
-                      color: Colors.red.shade900,
+                      size: 55,
+                      color: Colors.black,
                     )
                 ],
               ),

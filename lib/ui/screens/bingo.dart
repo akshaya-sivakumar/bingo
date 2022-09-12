@@ -40,15 +40,18 @@ class _MyHomePageState extends State<MyHomePage> {
         }
         return FabCircularMenu(
             key: fabKey,
-            onDisplayChange: (value) {
-              print(value);
-            },
+            animationDuration: const Duration(milliseconds: 100),
             fabMargin: const EdgeInsets.all(0),
             fabSize: 60,
             fabElevation: 10,
             ringDiameter: 310,
             fabCloseColor: Colors.pink.shade300,
             fabOpenColor: Colors.pink.shade300,
+            fabCloseIcon: const Icon(
+              Icons.close,
+              size: 30,
+              color: Colors.white,
+            ),
             ringColor: Colors.pink.withOpacity(0.5),
             fabOpenIcon: Image.asset(
               "assets/images/setting.png",
@@ -168,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 5,
           ),
           Text(
-            state.opponentMove ? "Opponent's turn..." : "Yours turn",
+            "Opponent's turn...",
             style: GoogleFonts.adventPro(color: Colors.white),
           )
         ],
