@@ -5,7 +5,7 @@ import 'package:async/async.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bingo/constants.dart';
 import 'package:bingo/ui/screens/generate_code.dart';
-import 'package:bingo/ui/screens/join_game.dart';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,7 +112,9 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
           } else {
             bingoDonestate.opponentMove = false;
           }
-          print(bingoDonestate.opponentMove);
+          if (kDebugMode) {
+            print(bingoDonestate.opponentMove);
+          }
           bingoDonestate.selectedList.add(bingoDetail.value);
 
           checkBingo();

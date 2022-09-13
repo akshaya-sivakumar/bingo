@@ -9,10 +9,10 @@ class AnimationScreen extends StatefulWidget {
   const AnimationScreen({Key? key, required this.color}) : super(key: key);
 
   @override
-  _AnimationScreenState createState() => _AnimationScreenState();
+  AnimationScreenState createState() => AnimationScreenState();
 }
 
-class _AnimationScreenState extends State<AnimationScreen>
+class AnimationScreenState extends State<AnimationScreen>
     with SingleTickerProviderStateMixin {
   Size size = Size.zero;
   late AnimationController _controller;

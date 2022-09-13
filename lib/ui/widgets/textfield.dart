@@ -45,7 +45,7 @@ class TextFieldWidget extends StatelessWidget {
                     fontSize: 15,
                     fontWeight: FontWeight.w900),
                 decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.person),
+                    suffixIcon: const Icon(Icons.person),
                     contentPadding:
                         const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     prefixIcon: leadingIcon,

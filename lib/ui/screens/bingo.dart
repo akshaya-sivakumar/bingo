@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
-import 'package:bingo/ui/screens/generate_code.dart';
+
 import 'package:bingo/ui/screens/join_game.dart';
 
 import 'package:bingo/ui/widgets/bingo_box.dart';
@@ -184,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.white,
             size: 35.sp,
           ),
-          SizedBox(
+          const SizedBox(
             width: 7,
           ),
           Text(

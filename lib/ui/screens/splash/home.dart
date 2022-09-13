@@ -1,6 +1,6 @@
 import 'package:bingo/ui/screens/splash/animation.dart';
 import 'package:bingo/ui/screens/splashscreen.dart';
-import 'package:hexcolor/hexcolor.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -8,10 +8,10 @@ class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
@@ -20,8 +20,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: Stack(children: <Widget>[
-      const Splash(),
+        child: Stack(children: const <Widget>[
+      Splash(),
       IgnorePointer(
           child: AnimationScreen(
         color: Colors.purpleAccent,

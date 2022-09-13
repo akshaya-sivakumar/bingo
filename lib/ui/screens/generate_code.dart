@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
 import 'package:bingo/ui/screens/join_game.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -127,9 +128,47 @@ class _CodePageState extends State<CodePage> {
                                           repeat: true,
                                         ),
                                       ),
-                                      Text("Game Code : $code",
-                                          style: GoogleFonts.akayaKanadaka(
-                                              fontSize: 50.sp)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text("Game Code : $code",
+                                              style: GoogleFonts.akayaKanadaka(
+                                                  fontSize: 50.sp)),
+                                          InkWell(
+                                              onTap: () {
+                                                FlutterClipboard.copy(code!)
+                                                    .then(
+                                                  (value) {
+                                                    return ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 5.0),
+                                                          child: Text(
+                                                            'Text Copied',
+                                                            style: TextStyle(
+                                                                fontSize: 10),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 15.h),
+                                                child: const Icon(
+                                                  Icons.copy,
+                                                  size: 20,
+                                                ),
+                                              ))
+                                        ],
+                                      ),
                                       Text(
                                         "Share this game code with your friends to invite them to this game",
                                         style: GoogleFonts.abel(
@@ -179,7 +218,7 @@ class _CodePageState extends State<CodePage> {
   }
 
   Widget shareButton(BuildContext context) {
-    return Container(
+    return SizedBox(
       // padding: EdgeInsets.only(top: 10.h),
       height: 80.h,
       width: MediaQuery.of(context).size.width * 0.7,
