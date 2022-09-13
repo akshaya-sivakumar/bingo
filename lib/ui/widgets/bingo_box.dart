@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BingoBox extends StatelessWidget {
@@ -6,10 +7,14 @@ class BingoBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (kDebugMode) {
+      print(MediaQuery.of(context).size.height * 0.09);
+      print(MediaQuery.of(context).size.width * 0.15279);
+    }
     return Container(
       padding: EdgeInsets.zero,
-      height: 60,
-      width: 60,
+      height: MediaQuery.of(context).size.height * 0.089,
+      width: MediaQuery.of(context).size.width * 0.15279,
       color: ([...Colors.primaries]..shuffle()).first,
       child: Center(
           child: Container(

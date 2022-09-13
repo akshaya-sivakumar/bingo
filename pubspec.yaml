@@ -56,6 +56,7 @@ dependencies:
   async: ^2.8.2
   hexcolor: ^2.0.7
   shimmer: ^2.0.0
+  flutter_screenutil: ^5.5.4
 
 dev_dependencies:
   flutter_test:

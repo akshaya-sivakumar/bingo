@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bingo/model/bingo_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,64 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (state is BingoProgressstate) {
           return Container();
         }
-        return FabCircularMenu(
-            key: fabKey,
-            animationDuration: const Duration(milliseconds: 100),
-            fabMargin: const EdgeInsets.all(0),
-            fabSize: 60,
-            fabElevation: 10,
-            ringDiameter: 310,
-            fabCloseColor: Colors.pink.shade300,
-            fabOpenColor: Colors.pink.shade300,
-            fabCloseIcon: Image.asset("assets/images/cross.png"),
-            ringColor: Colors.pink.withOpacity(0.5),
-            fabOpenIcon: Image.asset(
-              "assets/images/setting.png",
-              fit: BoxFit.cover,
-            ),
-            children: <Widget>[
-              InkWell(
-                  child: Image.asset(
-                    MyHomePage.musicPlay
-                        ? "assets/images/music.png"
-                        : "assets/images/musicoff.png",
-                    width: 53,
-                  ),
-                  onTap: () {
-                    fabKey.currentState?.close();
-                    setState(() {
-                      MyHomePage.musicPlay = !MyHomePage.musicPlay;
-                    });
-                  }),
-              if (!state.start)
-                InkWell(
-                    child: Image.asset(
-                      autoFill
-                          ? "assets/images/retry.png"
-                          : "assets/images/autofill.png",
-                      width: 55,
-                    ),
-                    onTap: () {
-                      fabKey.currentState?.close();
-                      autoFill = !autoFill;
-                      BlocProvider.of<BingoBlocBloc>(context)
-                          .add(BingoAutofillEvent(autoFill));
-                    }),
-              InkWell(
-                  child: Image.asset(
-                    "assets/images/exit.png",
-                    width: 55,
-                  ),
-                  onTap: () {
-                    if (state.start == false) {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          "/initgame", (route) => false);
-                    } else {
-                      BlocProvider.of<BingoBlocBloc>(context).add(BingoAddEvent(
-                          BingoModel(name: AppConstants.user, value: "Exit")));
-                    }
-                  }),
-            ]);
+        return floatingButton(state, context);
       },
     ), child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
       builder: (context, state) {
@@ -139,22 +83,86 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset("assets/images/bingo_name.png"),
+            Image.asset(
+              "assets/images/bingo_name.png",
+              width: MediaQuery.of(context).size.width * 0.65,
+            ),
             bingoTable(state, context),
-            BingoName(state.bingoList.length),
+            if (state.start) BingoName(state.bingoList.length),
             if (state.opponentMove) turnCheck(context, state),
             if (!state.numberList.expand((element) => element).contains("") &&
                 !state.start)
               startButton(context, state),
-            if (state.start == true)
+            /*   if (state.start == true)
               const SizedBox(
                 height: 30,
-              ),
+              ), */
             //exitButton(context, state)
           ],
         );
       },
     ));
+  }
+
+  FabCircularMenu floatingButton(BingoBlocState state, BuildContext context) {
+    return FabCircularMenu(
+        key: fabKey,
+        animationDuration: const Duration(milliseconds: 100),
+        fabMargin: const EdgeInsets.all(0),
+        fabSize: 60,
+        fabElevation: 10,
+        ringDiameter: 310,
+        fabCloseColor: Colors.pink.shade300,
+        fabOpenColor: Colors.pink.shade300,
+        fabCloseIcon: Image.asset("assets/images/cross.png"),
+        ringColor: Colors.pink.withOpacity(0.5),
+        fabOpenIcon: Image.asset(
+          "assets/images/setting.png",
+          fit: BoxFit.cover,
+        ),
+        children: <Widget>[
+          InkWell(
+              child: Image.asset(
+                MyHomePage.musicPlay
+                    ? "assets/images/music.png"
+                    : "assets/images/musicoff.png",
+                width: 53,
+              ),
+              onTap: () {
+                fabKey.currentState?.close();
+                setState(() {
+                  MyHomePage.musicPlay = !MyHomePage.musicPlay;
+                });
+              }),
+          if (!state.start)
+            InkWell(
+                child: Image.asset(
+                  autoFill
+                      ? "assets/images/retry.png"
+                      : "assets/images/autofill.png",
+                  width: 55,
+                ),
+                onTap: () {
+                  fabKey.currentState?.close();
+                  autoFill = !autoFill;
+                  BlocProvider.of<BingoBlocBloc>(context)
+                      .add(BingoAutofillEvent(autoFill));
+                }),
+          InkWell(
+              child: Image.asset(
+                "assets/images/exit.png",
+                width: 55,
+              ),
+              onTap: () {
+                if (state.start == false) {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil("/initgame", (route) => false);
+                } else {
+                  BlocProvider.of<BingoBlocBloc>(context).add(BingoAddEvent(
+                      BingoModel(name: AppConstants.user, value: "Exit")));
+                }
+              }),
+        ]);
   }
 
   Container turnCheck(BuildContext context, BingoBlocState state) {
@@ -164,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
           borderRadius: BorderRadius.circular(20)),
       margin: const EdgeInsets.only(top: 5),
       padding: const EdgeInsets.all(10),
-      width: MediaQuery.of(context).size.width * 0.3,
+      width: MediaQuery.of(context).size.width * 0.35,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -203,7 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       child: Image.asset(
         "assets/images/start.png",
-        width: MediaQuery.of(context).size.width * 0.55,
+        width: MediaQuery.of(context).size.width * 0.5,
       ),
     );
   }
@@ -278,7 +286,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 state.numberList[i][j] != "")
               Image.asset(
                 "assets/images/cross.png",
-                width: 51,
+                width: MediaQuery.of(context).size.width * 0.125,
               ),
           ],
         ),

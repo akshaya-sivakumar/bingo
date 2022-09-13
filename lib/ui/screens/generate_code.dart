@@ -5,6 +5,8 @@ import 'package:bingo/ui/screens/join_game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
@@ -21,7 +23,7 @@ class _CodePageState extends State<CodePage> {
   TextEditingController codecontroller = TextEditingController();
   String? code;
   late BingoBlocBloc bingobloc;
-
+  bool waiting = true;
   @override
   void initState() {
     CodePage.type = "host";
@@ -35,6 +37,7 @@ class _CodePageState extends State<CodePage> {
         if (kDebugMode) {
           print("userJoined- ${event.userJoined}");
         }
+        waiting = false;
         bingobloc.close();
         Navigator.of(context).pushReplacementNamed("/bingo");
       }
@@ -73,115 +76,99 @@ class _CodePageState extends State<CodePage> {
                     Colors.blueAccent.withOpacity(0.5),
                   ],
                 )),
-                child: Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height,
+                  margin: const EdgeInsets.all(20),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.all(20),
-                        child: Column(
+                      Text(
+                        "JOIN MY ROOM",
+                        style: GoogleFonts.aladin(
+                            fontSize: 40.sp, color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 870.h,
+                        child: Stack(
+                          alignment: Alignment.center,
                           children: [
-                            Text(
-                              "JOIN MY ROOM",
-                              style: GoogleFonts.aladin(
-                                  fontSize: 30, color: Colors.white),
+                            Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Container(
+                                padding: EdgeInsets.all(30.h),
+                                height: 800.h,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topRight,
+                                      end: Alignment.bottomLeft,
+                                      colors: [
+                                        Colors.blue.shade200,
+                                        Colors.white,
+                                        Colors.pink.shade200,
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        width: 280.h,
+                                        height: 280.h,
+                                        child: Lottie.asset(
+                                          "assets/images/bingogame.json",
+                                          fit: BoxFit.fill,
+                                          repeat: true,
+                                        ),
+                                      ),
+                                      Text("Game Code : $code",
+                                          style: GoogleFonts.akayaKanadaka(
+                                              fontSize: 50.sp)),
+                                      Text(
+                                        "Share this game code with your friends to invite them to this game",
+                                        style: GoogleFonts.abel(
+                                            fontSize: 30.sp,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      shareButton(context),
+                                      enterroomButton(context)
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                            SizedBox(
-                              height: 550,
-                              child: Stack(
+                            Positioned(
+                              top: 0,
+                              child: Container(
+                                height: 70.h,
                                 alignment: Alignment.center,
-                                children: [
-                                  Card(
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(30),
-                                      height: 450,
-                                      decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topRight,
-                                            end: Alignment.bottomLeft,
-                                            colors: [
-                                              Colors.blue.shade200,
-                                              Colors.white,
-                                              Colors.pink.shade200,
-                                            ],
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      child: Center(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: 120,
-                                              child: Lottie.asset(
-                                                "assets/images/bingogame.json",
-                                                fit: BoxFit.fill,
-                                                repeat: true,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text("Game Code : $code",
-                                                style:
-                                                    GoogleFonts.akayaKanadaka(
-                                                        fontSize: 30)),
-                                            const SizedBox(
-                                              height: 30,
-                                            ),
-                                            Text(
-                                              "Share this game code with your friends to invite them to this game",
-                                              style: GoogleFonts.abel(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            shareButton(context),
-                                            enterroomButton(context)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                decoration: BoxDecoration(
+                                    color: Colors.blueAccent,
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8.h, horizontal: 20.h),
+                                  child: Text(
+                                    "share and invite",
+                                    style: GoogleFonts.akayaTelivigala(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 35.sp),
                                   ),
-                                  Positioned(
-                                    top: 25,
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          color: Colors.blueAccent,
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      height: 50,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0, horizontal: 15),
-                                        child: Text(
-                                          "share and invite",
-                                          style: GoogleFonts.akayaTelivigala(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 25),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      if (waiting) turnCheck(context)
                     ],
                   ),
                 ),
@@ -191,8 +178,10 @@ class _CodePageState extends State<CodePage> {
         ));
   }
 
-  SizedBox shareButton(BuildContext context) {
-    return SizedBox(
+  Widget shareButton(BuildContext context) {
+    return Container(
+      // padding: EdgeInsets.only(top: 10.h),
+      height: 80.h,
       width: MediaQuery.of(context).size.width * 0.7,
       child: TextButton(
           style: TextButton.styleFrom(backgroundColor: Colors.pink),
@@ -200,16 +189,18 @@ class _CodePageState extends State<CodePage> {
             _onShareWithResult(context);
           },
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "Share ",
                 style: GoogleFonts.akayaKanadaka(
-                    color: Colors.white, fontSize: 22),
+                    color: Colors.white, fontSize: 35.sp),
               ),
-              const Icon(
+              Icon(
                 Icons.share,
                 color: Colors.white,
+                size: 35.sp,
               )
             ],
           )),
@@ -218,6 +209,7 @@ class _CodePageState extends State<CodePage> {
 
   SizedBox enterroomButton(BuildContext context) {
     return SizedBox(
+      height: 80.h,
       width: MediaQuery.of(context).size.width * 0.7,
       child: TextButton(
           style: TextButton.styleFrom(backgroundColor: Colors.blue),
@@ -227,16 +219,18 @@ class _CodePageState extends State<CodePage> {
             Navigator.of(context).pushNamed("/bingo");
           },
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "Enter into the room ",
                 style: GoogleFonts.akayaKanadaka(
-                    color: Colors.white, fontSize: 22),
+                    color: Colors.white, fontSize: 35.sp),
               ),
-              const Icon(
+              Icon(
                 Icons.login,
                 color: Colors.white,
+                size: 35.sp,
               )
             ],
           )),
@@ -260,5 +254,32 @@ class _CodePageState extends State<CodePage> {
         content: Text("Share result: ${result.status}"),
       )); */
     }
+  }
+
+  Container turnCheck(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(20)),
+      margin: const EdgeInsets.only(top: 5),
+      padding: const EdgeInsets.all(10),
+      width: MediaQuery.of(context).size.width * 0.5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SpinKitWave(
+            color: Colors.white,
+            size: 25,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            "Wait Until other user to join",
+            style: GoogleFonts.chicle(color: Colors.white),
+          )
+        ],
+      ),
+    );
   }
 }

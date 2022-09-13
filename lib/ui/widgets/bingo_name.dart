@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BingoName extends StatelessWidget {
@@ -11,6 +12,9 @@ class BingoName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 30.h),
+      height: 150.h,
+      alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
           color: Colors.pink.shade100,
@@ -27,7 +31,7 @@ class BingoName extends StatelessWidget {
             width: 0.5,
             color: Colors.pink,
           )),
-      width: 280.0,
+      width: MediaQuery.of(context).size.width * 0.8,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -42,7 +46,9 @@ class BingoName extends StatelessWidget {
                     style: GoogleFonts.chicle(
                         color: Colors.pink,
                         fontWeight: FontWeight.w900,
-                        shadows: [const Shadow(color: Colors.blue, blurRadius: 5)],
+                        shadows: [
+                          const Shadow(color: Colors.blue, blurRadius: 5)
+                        ],
                         fontSize: 45),
                   ),
                   if (bingo >= i + 1)

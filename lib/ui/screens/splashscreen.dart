@@ -61,9 +61,9 @@ class _SplashState extends State<Splash> {
                       ],
                     )),
                     child: SizedBox(
-                      width: 400,
+                      // width: 400,
                       child: Lottie.asset("assets/images/bingo.json",
-                          fit: BoxFit.cover, repeat: true, width: 400),
+                          fit: BoxFit.fill, repeat: true),
                     ),
                   ),
                 ],
