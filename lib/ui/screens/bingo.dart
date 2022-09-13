@@ -52,9 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     ), child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
       builder: (context, state) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          DialogWidget.hostDialog(context, state.winnerName.toString());
-        });
         if (state is BingoClosestate) {
           if (state.opponentLeft) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
