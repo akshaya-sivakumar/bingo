@@ -15,7 +15,7 @@ class BingoName extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 30.h),
       height: 150.h,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       decoration: BoxDecoration(
           color: Colors.pink.shade100,
           gradient: LinearGradient(colors: [
@@ -49,14 +49,14 @@ class BingoName extends StatelessWidget {
                         shadows: [
                           const Shadow(color: Colors.blue, blurRadius: 5)
                         ],
-                        fontSize: 45),
+                        fontSize: 90.sp),
                   ),
-                  if (bingo >= i + 1)
-                    const Icon(
-                      Icons.check,
-                      size: 55,
-                      color: Colors.black,
-                    )
+                  //   if (bingo >= i + 1)
+                  Icon(
+                    Icons.check,
+                    size: 80.sp,
+                    color: Colors.black,
+                  )
                 ],
               ),
             ),

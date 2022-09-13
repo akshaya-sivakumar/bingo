@@ -52,6 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     ), child: BlocBuilder<BingoBlocBloc, BingoBlocState>(
       builder: (context, state) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          DialogWidget.hostDialog(context, state.winnerName.toString());
+        });
         if (state is BingoClosestate) {
           if (state.opponentLeft) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -170,18 +173,19 @@ class _MyHomePageState extends State<MyHomePage> {
       decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.3),
           borderRadius: BorderRadius.circular(20)),
-      margin: const EdgeInsets.only(top: 5),
-      padding: const EdgeInsets.all(10),
-      width: MediaQuery.of(context).size.width * 0.35,
-      child: Column(
+      margin: EdgeInsets.only(top: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 11.sp),
+      width: MediaQuery.of(context).size.width * 0.45,
+      height: 61.h,
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SpinKitWave(
+          SpinKitWave(
             color: Colors.white,
-            size: 25,
+            size: 35.sp,
           ),
-          const SizedBox(
-            height: 5,
+          SizedBox(
+            width: 7,
           ),
           Text(
             "Opponent's turn...",

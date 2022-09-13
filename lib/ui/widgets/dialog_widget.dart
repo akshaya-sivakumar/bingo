@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -10,10 +11,11 @@ import '../../constants.dart';
 
 class DialogWidget {
   static void hostDialog(BuildContext context, String name) {
+    name = "ak";
     AwesomeDialog(
       dismissOnBackKeyPress: false,
       dismissOnTouchOutside: false,
-      dialogBackgroundColor: Colors.pink.shade100,
+      dialogBackgroundColor: Colors.transparent,
       context: context, bodyHeaderDistance: 0,
       dialogBorderRadius: BorderRadius.circular(50),
       isDense: false,
@@ -22,12 +24,13 @@ class DialogWidget {
       // showCloseIcon: true,
       // ignore: deprecated_member_use
       animType: AnimType.bottomSlide,
-      borderSide: const BorderSide(color: Colors.pink, width: 2),
+      borderSide: const BorderSide(color: Colors.transparent),
       barrierColor: Colors.orangeAccent.withOpacity(0.5),
       padding: EdgeInsets.zero,
+
       customHeader: CircleAvatar(
-        radius: 50,
-        backgroundColor: Colors.white.withOpacity(0.5),
+        radius: 53,
+        backgroundColor: Colors.pinkAccent,
         child: Lottie.asset(
           AppConstants.user == name
               ? "assets/images/winners.json"
@@ -63,12 +66,16 @@ class DialogWidget {
                         name == AppConstants.user
                             ? "assets/images/congrats.png"
                             : "assets/images/oops.png",
-                        width: 300,
-                        height: 200,
+                        width: name == AppConstants.user
+                            ? MediaQuery.of(context).size.width * 0.6
+                            : MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.25,
                         fit: BoxFit.fill,
                       )),
                   Positioned(
-                    top: name == AppConstants.user ? 150 : 160,
+                    top: name == AppConstants.user
+                        ? MediaQuery.of(context).size.height * 0.18
+                        : MediaQuery.of(context).size.height * 0.21,
                     child: InkWell(
                       onTap: () {},
                       child: Text(
@@ -78,7 +85,7 @@ class DialogWidget {
                                 ? Colors.white
                                 : Colors.white,
                             fontWeight: FontWeight.w900,
-                            fontSize: 25),
+                            fontSize: 20),
                       ),
                     ),
                   ),
