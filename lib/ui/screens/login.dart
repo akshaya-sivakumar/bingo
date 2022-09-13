@@ -57,19 +57,15 @@ class _LoginState extends State<Login> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.2),
+                            top: MediaQuery.of(context).size.height * 0.1),
                         child: Image.asset(
                           "assets/images/bingo.png",
                           width: MediaQuery.of(context).size.width * 0.8,
                         ),
                       ),
                       Container(
-                        height: 250, width: 450,
-                        //  width: MediaQuery.of(context).size.width * 0.8,
-                        /* decoration: BoxDecoration(
-                            border: Border.all(color: Colors.pink),
-                            borderRadius: BorderRadius.circular(25),
-                            color: Colors.purple.shade200), */
+                        height: 250,
+                        width: 450,
                         padding: const EdgeInsets.all(5),
                         child: Stack(
                           alignment: Alignment.center,
