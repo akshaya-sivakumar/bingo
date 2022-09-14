@@ -11,7 +11,7 @@ file_name='app-release.apk'
 CONTENT_TYPE='application/vnd.android.package-archive'
 APPCENTER_OUTPUT_DIRECTORY="."
 UPLOAD_DOMAIN="https://file.appcenter.ms/upload"
-API_URL="https://api.appcenter.ms/v0.1/apps/akash111999-gmail.com/BINGO"
+API_URL="https://api.appcenter.ms/v0.1/apps/spark-ak/BINGO"
 ACCEPT_JSON="Accept: application/json"
 APP_PACKAGE=$3
 # Body - Step 1/7

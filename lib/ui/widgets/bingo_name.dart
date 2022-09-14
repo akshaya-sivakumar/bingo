@@ -51,12 +51,12 @@ class BingoName extends StatelessWidget {
                         ],
                         fontSize: 90.sp),
                   ),
-                  //   if (bingo >= i + 1)
-                  Icon(
-                    Icons.check,
-                    size: 80.sp,
-                    color: Colors.black,
-                  )
+                  if (bingo >= i + 1)
+                    Icon(
+                      Icons.check,
+                      size: 80.sp,
+                      color: Colors.black,
+                    )
                 ],
               ),
             ),

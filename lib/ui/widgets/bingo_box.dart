@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BingoBox extends StatelessWidget {
   final String number;
@@ -13,8 +14,8 @@ class BingoBox extends StatelessWidget {
     }
     return Container(
       padding: EdgeInsets.zero,
-      height: MediaQuery.of(context).size.height * 0.089,
-      width: MediaQuery.of(context).size.width * 0.15279,
+      height: 98.h,
+      width: 98.h,
       color: ([...Colors.primaries]..shuffle()).first,
       child: Center(
           child: Container(
