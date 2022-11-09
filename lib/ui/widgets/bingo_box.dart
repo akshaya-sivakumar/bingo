@@ -9,8 +9,8 @@ class BingoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (kDebugMode) {
-      print(MediaQuery.of(context).size.height * 0.09);
-      print(MediaQuery.of(context).size.width * 0.15279);
+      //  print(MediaQuery.of(context).size.height * 0.09);
+      // print(MediaQuery.of(context).size.width * 0.15279);
     }
     return Container(
       padding: EdgeInsets.zero,

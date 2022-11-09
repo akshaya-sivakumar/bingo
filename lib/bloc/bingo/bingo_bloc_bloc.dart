@@ -5,7 +5,6 @@ import 'package:async/async.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bingo/constants.dart';
 import 'package:bingo/ui/screens/generate_code.dart';
-
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +49,7 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
       channels?.sink.close();
 
       channels = IOWebSocketChannel.connect(Uri.parse(
-          'ws://bingo-api-vxbrwrpk5q-el.a.run.app/ws/${event.gamecode}/${CodePage.type}/2'));
+          'ws://192.168.43.109:8080/ws/${event.gamecode}/${CodePage.type}/2'));
       if (kDebugMode) {
         print("connected ${event.gamecode} ${CodePage.type}");
       }

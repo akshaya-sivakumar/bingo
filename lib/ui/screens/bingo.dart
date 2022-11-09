@@ -1,19 +1,15 @@
 import 'dart:math' as math;
 
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
-
+import 'package:bingo/model/bingo_model.dart';
 import 'package:bingo/ui/screens/join_game.dart';
-
 import 'package:bingo/ui/widgets/bingo_box.dart';
 import 'package:bingo/ui/widgets/bingo_name.dart';
 import 'package:bingo/ui/widgets/bingo_scaffold.dart';
 import 'package:bingo/ui/widgets/dialog_widget.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:bingo/model/bingo_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -300,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
       left: data > 9
           ? 120
           : (data > 5 && data < 10)
-              ? ((data - 5) * 60).toDouble()
+              ? ((data - 5) * 60) - 23.toDouble()
               : 0,
       top: data > 9
           ? -60
