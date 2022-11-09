@@ -14,19 +14,19 @@ class BingoBox extends StatelessWidget {
     }
     return Container(
       padding: EdgeInsets.zero,
-      height: 98.h,
-      width: 98.h,
       color: ([...Colors.primaries]..shuffle()).first,
       child: Center(
           child: Container(
         decoration: BoxDecoration(
-            color: Colors.red, borderRadius: BorderRadius.circular(50)),
+            color: Colors.red, borderRadius: BorderRadius.circular(50.r)),
         child: CircleAvatar(
           backgroundColor: Colors.white,
           child: Text(
             number,
-            style: const TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+            style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
           ),
         ),
       )),

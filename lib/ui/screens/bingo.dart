@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:bingo/bloc/bingo/bingo_bloc_bloc.dart';
 import 'package:bingo/model/bingo_model.dart';
 import 'package:bingo/ui/screens/join_game.dart';
@@ -217,38 +215,47 @@ class _MyHomePageState extends State<MyHomePage> {
     return IgnorePointer(
       ignoring: state.opponentMove,
       child: Container(
-        padding: const EdgeInsets.all(22),
+        alignment: Alignment.center,
+        height: ((98.h) * 5) + 60.h,
+        width: ((98.h) * 5) + 60.h,
+        padding: EdgeInsets.all(22.h),
         decoration: BoxDecoration(
-            color: Colors.pink, borderRadius: BorderRadius.circular(50)),
-        child: Stack(
+            color: Colors.pink, borderRadius: BorderRadius.circular(80.r)),
+        child: Container(
           alignment: Alignment.center,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.pink, borderRadius: BorderRadius.circular(50)),
-              child: Table(
-                border: TableBorder.all(color: Colors.white),
-                columnWidths: const <int, TableColumnWidth>{
-                  0: IntrinsicColumnWidth(),
-                  1: IntrinsicColumnWidth(),
-                  2: IntrinsicColumnWidth(),
-                  3: IntrinsicColumnWidth(),
-                  4: IntrinsicColumnWidth(),
-                },
-                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                children: <TableRow>[
-                  for (int i = 0; i < 5; i++)
-                    TableRow(
-                      children: <Widget>[
-                        for (int j = 0; j < 5; j++)
-                          numberBox(state, i, j, context),
-                      ],
-                    ),
-                ],
+          color: Colors.green.withOpacity(0.8),
+          height: ((99.h) * 5),
+          width: ((99.h) * 5),
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.zero,
+                margin: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 1.h)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < 5; i++)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (int j = 0; j < 5; j++)
+                            SizedBox(
+                                height: (98).h,
+                                width: (98).h,
+                                child: numberBox(state, i, j, context)),
+                        ],
+                      ),
+                  ],
+                ),
               ),
-            ),
-            for (var datas in state.bingoList) bingoLinelogic(datas),
-          ],
+              for (var datas in state.bingoList) bingoLinelogic(datas),
+            ],
+          ),
         ),
       ),
     );
@@ -275,62 +282,75 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }
         },
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            BingoBox(number: state.numberList[i][j]),
-            if (state.selectedList.contains(state.numberList[i][j]) &&
-                state.numberList[i][j] != "")
-              Image.asset(
-                "assets/images/cross.png",
-                width: MediaQuery.of(context).size.width * 0.125,
-              ),
-          ],
+        child: SizedBox(
+          /*  height: (98).h,
+          width: (98).h, */
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              BingoBox(number: state.numberList[i][j]),
+              if (state.selectedList.contains(state.numberList[i][j]) &&
+                  state.numberList[i][j] != "")
+                Image.asset(
+                  "assets/images/cross.png",
+                  width: 90.h,
+                ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Positioned bingoLinelogic(data) {
+    print("data$data");
     return Positioned(
       left: data > 9
-          ? 120
+          ? (99.h) * 2
           : (data > 5 && data < 10)
-              ? ((data - 5) * 60) - 23.toDouble()
+              ? (data - 5) * 99.h
               : 0,
       top: data > 9
-          ? -60
-          : (data < 5 && data < 10)
-              ? (data * 60) + 25.toDouble()
-              : 0,
-      child: Transform.rotate(
-          angle: data == 10
-              ? math.pi / 1.33
-              : data == 11
-                  ? -math.pi / 1.33
-                  : -math.pi / 1,
-          child: Container(
-            height: data > 9
-                ? 424
-                : (data < 5)
-                    ? 0
-                    : 300,
-            alignment: Alignment.topCenter,
-            width: data > 9
-                ? 60
-                : (data < 5 && data < 10)
-                    ? 300
-                    : 60,
-            child: (data < 5)
-                ? const Divider(
-                    thickness: 5,
-                    color: Colors.black,
-                  )
-                : const VerticalDivider(
-                    thickness: 5,
-                    color: Colors.black,
-                  ),
-          )),
+          ? 0
+          : (data > 5 && data < 10)
+              ? 0
+              : data * (99.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          SizedBox(
+            child: RotationTransition(
+                turns: AlwaysStoppedAnimation(data == 10
+                    ? (0 / 360)
+                    : data == 11
+                        ? (45 / 360)
+                        : (0 / 360)),
+                child: Container(
+                  color: Colors.white.withOpacity(0.5),
+                  height: data > 9
+                      ? (692.96.h)
+                      : (data < 5)
+                          ? 99.h
+                          : 99.h * 5,
+                  alignment: Alignment.center,
+                  width: data > 9
+                      ? (99.h)
+                      : (data > 5 && data < 10)
+                          ? 99.h
+                          : (99.h) * 5,
+                  child: (data < 5)
+                      ? const Divider(
+                          thickness: 5,
+                          color: Colors.black,
+                        )
+                      : const VerticalDivider(
+                          thickness: 5,
+                          color: Colors.black,
+                        ),
+                )),
+          ),
+        ],
+      ),
     );
   }
 }
