@@ -303,7 +303,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Positioned bingoLinelogic(data) {
-    print("data$data");
     return Positioned(
       left: data > 9
           ? (99.h) * 2
