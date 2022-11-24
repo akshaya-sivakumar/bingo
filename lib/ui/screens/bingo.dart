@@ -318,37 +318,35 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          SizedBox(
-            child: RotationTransition(
-                turns: AlwaysStoppedAnimation(data == 10
-                    ? (0 / 360)
-                    : data == 11
-                        ? (45 / 360)
-                        : (0 / 360)),
-                child: Container(
-                  color: Colors.white.withOpacity(0.5),
-                  height: data > 9
-                      ? (692.96.h)
-                      : (data < 5)
-                          ? 99.h
-                          : 99.h * 5,
-                  alignment: Alignment.center,
-                  width: data > 9
-                      ? (99.h)
-                      : (data > 5 && data < 10)
-                          ? 99.h
-                          : (99.h) * 5,
-                  child: (data < 5)
-                      ? const Divider(
-                          thickness: 5,
-                          color: Colors.black,
-                        )
-                      : const VerticalDivider(
-                          thickness: 5,
-                          color: Colors.black,
-                        ),
-                )),
-          ),
+          RotationTransition(
+              turns: AlwaysStoppedAnimation(data == 10
+                  ? (-45 / 360)
+                  : data == 11
+                      ? (45 / 360)
+                      : (0 / 360)),
+              child: Container(
+                color: Colors.white.withOpacity(0.5),
+                height: data > 9
+                    ? (692.96.h)
+                    : (data < 5)
+                        ? 99.h
+                        : 99.h * 5,
+                alignment: Alignment.center,
+                width: data > 9
+                    ? (99.h)
+                    : (data > 5 && data < 10)
+                        ? 99.h
+                        : (99.h) * 5,
+                child: (data < 5)
+                    ? const Divider(
+                        thickness: 5,
+                        color: Colors.black,
+                      )
+                    : const VerticalDivider(
+                        thickness: 5,
+                        color: Colors.black,
+                      ),
+              )),
         ],
       ),
     );
