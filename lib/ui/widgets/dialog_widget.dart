@@ -10,7 +10,6 @@ import '../../constants.dart';
 
 class DialogWidget {
   static void hostDialog(BuildContext context, String name) {
-    name = "ak";
     AwesomeDialog(
       dismissOnBackKeyPress: false,
       dismissOnTouchOutside: false,

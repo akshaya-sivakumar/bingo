@@ -311,7 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ? (data - 5) * 99.h
               : 0,
       top: data > 9
-          ? 0
+          ? -99.h
           : (data > 5 && data < 10)
               ? 0
               : data * (99.h),
@@ -325,7 +325,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       ? (45 / 360)
                       : (0 / 360)),
               child: Container(
-                color: Colors.white.withOpacity(0.5),
                 height: data > 9
                     ? (692.96.h)
                     : (data < 5)
