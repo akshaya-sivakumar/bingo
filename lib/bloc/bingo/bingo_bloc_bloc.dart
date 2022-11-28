@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:async/async.dart';
@@ -47,9 +48,22 @@ class BingoBlocBloc extends Bloc<BingoBlocEvent, BingoBlocState> {
   void gameHost() {
     on<BingohostEvent>((event, emit) async {
       channels?.sink.close();
+      String localIp = '';
+      final List<String> privateNetworkMasks = ['10', '172.16', '192.168'];
+      for (var interface in await NetworkInterface.list()) {
+        for (var addr in interface.addresses) {
+          for (final possibleMask in privateNetworkMasks) {
+            if (addr.address.startsWith(possibleMask)) {
+              localIp = addr.address;
+              print("ip $localIp");
+              break;
+            }
+          }
+        }
+      }
 
       channels = IOWebSocketChannel.connect(Uri.parse(
-          'ws://192.168.43.109:8080/ws/${event.gamecode}/${CodePage.type}/2'));
+          'ws://192.168.183.122:8080/ws/${event.gamecode}/${CodePage.type}/2'));
       if (kDebugMode) {
         print("connected ${event.gamecode} ${CodePage.type}");
       }
